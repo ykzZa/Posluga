@@ -76,12 +76,14 @@
                 android:paddingVertical="16dp"
                 android:text="@string/my_profile"
                 android:textColor="@color/dark_grey"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="gone" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp" />
+                android:layout_marginHorizontal="16dp"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/button_services"
@@ -93,13 +95,15 @@
                 android:paddingVertical="16dp"
                 android:text="@string/my_services"
                 android:textColor="@color/dark_grey"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="gone" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/button_created_projects"
@@ -111,12 +115,14 @@
                 android:paddingVertical="16dp"
                 android:text="@string/my_projects"
                 android:textColor="@color/dark_grey"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="gone" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp" />
+                android:layout_marginHorizontal="16dp"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/button_participating_projects"
@@ -128,12 +134,14 @@
                 android:paddingVertical="16dp"
                 android:text="@string/participating_projects"
                 android:textColor="@color/dark_grey"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="gone" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp" />
+                android:layout_marginHorizontal="16dp"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/button_completed_projects"
@@ -145,12 +153,15 @@
                 android:paddingVertical="16dp"
                 android:text="Completed projects"
                 android:textColor="@color/dark_grey"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="gone" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp" />
+
+                android:layout_marginHorizontal="16dp"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/button_settings"
@@ -197,7 +208,8 @@
                 android:paddingVertical="16dp"
                 android:text="@string/logout"
                 android:textColor="@color/red"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="gone" />
 
 
         </LinearLayout>
