@@ -7,27 +7,27 @@
 
     <fragment
         android:id="@+id/savedPostsFragment"
-        android:name="dev.ykzza.posluga.SavedPostsFragment"
+        android:name="dev.ykzza.posluga.presentation.saved_posts.SavedPostsFragment"
         android:label="fragment_saved_posts"
         tools:layout="@layout/fragment_saved_posts" />
     <fragment
         android:id="@+id/chatsFragment"
-        android:name="dev.ykzza.posluga.ChatsFragment"
+        android:name="dev.ykzza.posluga.presentation.chats.ChatsFragment"
         android:label="fragment_chats"
         tools:layout="@layout/fragment_chats" />
     <fragment
         android:id="@+id/createPostFragment"
-        android:name="dev.ykzza.posluga.CreatePostFragment"
+        android:name="dev.ykzza.posluga.presentation.create_post.CreatePostFragment"
         android:label="fragment_create_post"
         tools:layout="@layout/fragment_create_post" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="dev.ykzza.posluga.HomeFragment"
+        android:name="dev.ykzza.posluga.presentation.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/menuFragment"
-        android:name="dev.ykzza.posluga.MenuFragment"
+        android:name="dev.ykzza.posluga.presentation.menu.MenuFragment"
         android:label="fragment_menu"
         tools:layout="@layout/fragment_menu" />
 </navigation>
