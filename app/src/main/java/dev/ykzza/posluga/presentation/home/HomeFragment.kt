@@ -1,10 +1,11 @@
-package dev.ykzza.posluga
+package dev.ykzza.posluga.presentation.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import dev.ykzza.posluga.R
 
 class HomeFragment : Fragment() {
     override fun onCreateView(

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Posluga</string>
+    <string name="web_client_id">262905056118-44611m6tji9ncqa5g4guaqh1lo5jf4r1.apps.googleusercontent.com</string>
 
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
@@ -20,5 +21,6 @@
     <string name="participating_projects">Participating projects</string>
     <string name="about">About</string>
     <string name="advice">Please log in to your own account to get the full functionality of the application: create services, projects, communicate in the application, etc.</string>
-    <string name="login_with_google">Login with Google</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

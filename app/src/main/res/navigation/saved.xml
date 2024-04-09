@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/saved"
+    app:startDestination="@id/savedPostsFragment">
+
+    <fragment
+        android:id="@+id/savedPostsFragment"
+        android:name="dev.ykzza.posluga.presentation.saved_posts.SavedPostsFragment"
+        android:label="fragment_saved_posts"
+        tools:layout="@layout/fragment_saved_posts" />
+</navigation>

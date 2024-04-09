@@ -3,31 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/homeFragment"
+        android:id="@+id/home"
         android:enabled="true"
         android:icon="@drawable/ic_main_page"
         android:title="Home" />
 
     <item
-        android:id="@+id/savedPostsFragment"
+        android:id="@+id/saved"
         android:enabled="true"
         android:icon="@drawable/ic_bookmark"
         android:title="Saved" />
 
     <item
-        android:id="@+id/createPostFragment"
+        android:id="@+id/create"
         android:enabled="true"
         android:icon="@drawable/ic_add"
         android:title="Create" />
 
     <item
-        android:id="@+id/chatsFragment"
+        android:id="@+id/chats"
         android:enabled="true"
         android:icon="@drawable/ic_chat"
         android:title="Chats" />
 
     <item
-        android:id="@+id/menuFragment"
+        android:id="@+id/menu"
         android:enabled="true"
         android:icon="@drawable/ic_menu"
         android:title="Menu" />

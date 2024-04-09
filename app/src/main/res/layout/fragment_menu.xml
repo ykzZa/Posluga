@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MenuFragment">
+    tools:context=".presentation.menu.MenuFragment">
 
     <ImageView
         android:id="@+id/image_view_logo"
@@ -36,19 +36,19 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/advice"
-        app:layout_constraintBottom_toTopOf="@id/google_sign_in_button"
-        app:layout_constraintEnd_toEndOf="@id/google_sign_in_button"
-        app:layout_constraintStart_toStartOf="@id/google_sign_in_button"
+        app:layout_constraintBottom_toTopOf="@id/login_button"
+        app:layout_constraintEnd_toEndOf="@id/login_button"
+        app:layout_constraintStart_toStartOf="@id/login_button"
         app:layout_constraintTop_toBottomOf="@id/text_view_welcome" />
 
     <Button
-        android:id="@+id/google_sign_in_button"
+        android:id="@+id/login_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="4dp"
         android:elevation="4dp"
-        android:text="@string/login_with_google"
+        android:text="@string/login"
         app:layout_constraintBottom_toTopOf="@id/scroll_view_options"
         app:layout_constraintTop_toBottomOf="@id/text_view_advice" />
 
@@ -59,7 +59,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/google_sign_in_button">
+        app:layout_constraintTop_toBottomOf="@id/login_button">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -80,6 +80,7 @@
                 android:visibility="gone" />
 
             <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -99,6 +100,7 @@
                 android:visibility="gone" />
 
             <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider_services"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -119,6 +121,7 @@
                 android:visibility="gone" />
 
             <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider_created_projects"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -138,30 +141,12 @@
                 android:visibility="gone" />
 
             <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider_participating_projects"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:visibility="gone" />
 
-            <Button
-                android:id="@+id/button_completed_projects"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:drawableLeft="@drawable/ic_completed_projects"
-                android:gravity="start|center"
-                android:paddingVertical="16dp"
-                android:text="Completed projects"
-                android:textColor="@color/dark_grey"
-                android:textSize="18sp"
-                android:visibility="gone" />
-
-            <com.google.android.material.divider.MaterialDivider
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_marginHorizontal="16dp"
-                android:visibility="gone" />
 
             <Button
                 android:id="@+id/button_settings"

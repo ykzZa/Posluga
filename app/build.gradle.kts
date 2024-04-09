@@ -61,4 +61,6 @@ dependencies {
     implementation("com.google.firebase:firebase-crashlytics:18.4.3")
     implementation("com.google.firebase:firebase-analytics:21.3.0")
     implementation("com.google.firebase:firebase-auth-ktx:22.1.2")
+
+    implementation("com.google.android.gms:play-services-auth:20.4.1")
 }
