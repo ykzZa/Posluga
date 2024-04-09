@@ -3,31 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/home">
 
-    <fragment
-        android:id="@+id/savedPostsFragment"
-        android:name="dev.ykzza.posluga.presentation.saved_posts.SavedPostsFragment"
-        android:label="fragment_saved_posts"
-        tools:layout="@layout/fragment_saved_posts" />
-    <fragment
-        android:id="@+id/chatsFragment"
-        android:name="dev.ykzza.posluga.presentation.chats.ChatsFragment"
-        android:label="fragment_chats"
-        tools:layout="@layout/fragment_chats" />
-    <fragment
-        android:id="@+id/createPostFragment"
-        android:name="dev.ykzza.posluga.presentation.create_post.CreatePostFragment"
-        android:label="fragment_create_post"
-        tools:layout="@layout/fragment_create_post" />
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="dev.ykzza.posluga.presentation.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
-    <fragment
-        android:id="@+id/menuFragment"
-        android:name="dev.ykzza.posluga.presentation.menu.MenuFragment"
-        android:label="fragment_menu"
-        tools:layout="@layout/fragment_menu" />
+    <include app:graph="@navigation/menu" />
+    <include app:graph="@navigation/chats" />
+    <include app:graph="@navigation/create" />
+    <include app:graph="@navigation/home" />
+    <include app:graph="@navigation/saved" />
 </navigation>
