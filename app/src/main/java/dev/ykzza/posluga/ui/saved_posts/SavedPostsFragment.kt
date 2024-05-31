@@ -1,4 +1,4 @@
-package dev.ykzza.posluga.presentation.chats
+package dev.ykzza.posluga.ui.saved_posts
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import dev.ykzza.posluga.R
 
-class ChatsFragment : Fragment() {
+class SavedPostsFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chats, container, false)
+        return inflater.inflate(R.layout.fragment_saved_posts, container, false)
     }
 }

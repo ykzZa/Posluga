@@ -6,7 +6,7 @@
     app:startDestination="@id/chatsFragment">
     <fragment
         android:id="@+id/chatsFragment"
-        android:name="dev.ykzza.posluga.presentation.chats.ChatsFragment"
+        android:name="dev.ykzza.posluga.ui.chats.ChatsFragment"
         android:label="fragment_chats"
         tools:layout="@layout/fragment_chats" />
 </navigation>
