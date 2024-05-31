@@ -17,9 +17,6 @@
             android:id="@+id/action_menuFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/action_menuFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-        <action
             android:id="@+id/action_menuFragment_to_myServicesFragment"
             app:destination="@id/myServicesFragment" />
         <action
@@ -28,6 +25,9 @@
         <action
             android:id="@+id/action_menuFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
@@ -46,11 +46,6 @@
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="dev.ykzza.posluga.ui.menu.profile.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/passwordRecoveryFragment"
         android:name="dev.ykzza.posluga.ui.auth.PasswordRecoveryFragment"
@@ -76,4 +71,9 @@
         android:name="dev.ykzza.posluga.ui.menu.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="dev.ykzza.posluga.ui.menu.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
