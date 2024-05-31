@@ -5,5 +5,6 @@ data class User(
     var nickname: String,
     val phoneNumber: String,
     val instagram: String,
-    val telegram: String
+    val telegram: String,
+    val photoUrl: String
 )

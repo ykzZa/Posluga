@@ -83,6 +83,10 @@ class AuthViewModel @Inject constructor(
             _signUp.value = UiState.Error("Nickname can't be blank.")
             return false
         }
+        if(userData.nickname.length >= 40) {
+            _signUp.value = UiState.Error("Name is too long.")
+            return false
+        }
         if (password.isBlank() || password.length < 6) {
             _signUp.value = UiState.Error("Password is too short.")
             return false
