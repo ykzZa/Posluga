@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.saved_posts.SavedPostsFragment">
+    tools:context=".ui.saved_posts.SavedPostsFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

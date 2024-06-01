@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.menu.profile.ProfileFragment">
+
+    <ImageView
+        android:id="@+id/button_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/black" />
+
+    <ImageView
+        android:id="@+id/button_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:src="@drawable/ic_edit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/black" />
+
+
+    <ImageView
+        android:id="@+id/image_view_profile_pic"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_profile_grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_back" />
+
+
+    <TextView
+        android:id="@+id/text_view_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/nunitosans_7pt_bold"
+        android:maxLines="1"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_view_profile_pic" />
+
+    <LinearLayout
+        android:id="@+id/statistic_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_name">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunitosans_7pt_regular"
+            android:text=""
+            android:textAlignment="center"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:fontFamily="@font/nunitosans_7pt_regular"
+            android:text=""
+            android:textAlignment="center"
+
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunitosans_7pt_regular"
+            android:text=""
+            android:textAlignment="center"
+
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_view_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/nunitosans_7pt_bold"
+        android:text="Details"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statistic_container" />
+
+    <ImageView
+        android:id="@+id/image_view_phone"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/ic_phone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_details"
+        app:tint="@color/black" />
+
+    <TextView
+        android:id="@+id/text_view_phone_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/nunitosans_7pt_regular"
+        android:text="@string/phone_text"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/text_view_phone"
+        app:layout_constraintStart_toEndOf="@id/image_view_phone"
+        app:layout_constraintTop_toTopOf="@id/image_view_phone" />
+
+    <TextView
+        android:id="@+id/text_view_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/nunitosans_7pt_regular"
+        android:text=""
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/image_view_phone"
+        app:layout_constraintStart_toEndOf="@id/image_view_phone"
+        app:layout_constraintTop_toBottomOf="@id/text_view_phone_info" />
+
+    <ImageView
+        android:id="@+id/image_view_telegram"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/ic_telegram_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_view_phone" />
+
+    <TextView
+        android:id="@+id/text_view_telegram_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/nunitosans_7pt_regular"
+        android:text="@string/telegram_text"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/text_view_telegram"
+        app:layout_constraintStart_toEndOf="@id/image_view_telegram"
+        app:layout_constraintTop_toTopOf="@id/image_view_telegram" />
+
+    <TextView
+        android:id="@+id/text_view_telegram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/nunitosans_7pt_regular"
+        android:text=""
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/image_view_telegram"
+        app:layout_constraintStart_toEndOf="@id/image_view_telegram"
+        app:layout_constraintTop_toBottomOf="@id/text_view_telegram_info" />
+
+    <ImageView
+        android:id="@+id/image_view_instagram"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/ic_instagram_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_view_telegram" />
+
+    <TextView
+        android:id="@+id/text_view_instagram_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/nunitosans_7pt_regular"
+        android:text="@string/instagram_text"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/text_view_instagram"
+        app:layout_constraintStart_toEndOf="@id/image_view_instagram"
+        app:layout_constraintTop_toTopOf="@id/image_view_instagram" />
+
+    <TextView
+        android:id="@+id/text_view_instagram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/nunitosans_7pt_regular"
+        android:text=""
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/image_view_instagram"
+        app:layout_constraintStart_toEndOf="@id/image_view_instagram"
+        app:layout_constraintTop_toBottomOf="@id/text_view_instagram_info" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

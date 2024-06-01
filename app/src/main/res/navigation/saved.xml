@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/savedPostsFragment"
-        android:name="dev.ykzza.posluga.presentation.saved_posts.SavedPostsFragment"
+        android:name="dev.ykzza.posluga.ui.saved_posts.SavedPostsFragment"
         android:label="fragment_saved_posts"
         tools:layout="@layout/fragment_saved_posts" />
 </navigation>
