@@ -26,25 +26,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/black" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_view_profile_pic"
+
+    <ImageView
+        android:id="@+id/image_view_profile_pic"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="16dp"
-        app:cardCornerRadius="64dp"
+        android:src="@drawable/ic_profile_grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_back">
+        app:layout_constraintTop_toBottomOf="@id/button_back" />
 
-        <ImageView
-            android:id="@+id/image_view_profile_pic"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_base_profile_pic"
-            app:tint="@color/grey" />
-
-    </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/text_view_name"
@@ -59,7 +51,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card_view_profile_pic" />
+        app:layout_constraintTop_toBottomOf="@id/image_view_profile_pic" />
 
     <LinearLayout
         android:id="@+id/statistic_container"
@@ -102,15 +94,15 @@
 
     <TextView
         android:id="@+id/text_view_details"
-        app:layout_constraintTop_toBottomOf="@id/statistic_container"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:fontFamily="@font/nunitosans_7pt_bold"
-        android:textSize="16sp"
         android:text="Details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statistic_container" />
 
     <ImageView
         android:id="@+id/image_view_phone"
@@ -129,8 +121,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/nunitosans_7pt_regular"
-        android:textSize="16sp"
         android:text="@string/phone_text"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/text_view_phone"
         app:layout_constraintStart_toEndOf="@id/image_view_phone"
         app:layout_constraintTop_toTopOf="@id/image_view_phone" />
@@ -163,8 +155,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/nunitosans_7pt_regular"
-        android:textSize="16sp"
         android:text="@string/telegram_text"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/text_view_telegram"
         app:layout_constraintStart_toEndOf="@id/image_view_telegram"
         app:layout_constraintTop_toTopOf="@id/image_view_telegram" />
@@ -197,8 +189,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/nunitosans_7pt_regular"
-        android:textSize="16sp"
         android:text="@string/instagram_text"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/text_view_instagram"
         app:layout_constraintStart_toEndOf="@id/image_view_instagram"
         app:layout_constraintTop_toTopOf="@id/image_view_instagram" />
@@ -214,5 +206,15 @@
         app:layout_constraintBottom_toBottomOf="@id/image_view_instagram"
         app:layout_constraintStart_toEndOf="@id/image_view_instagram"
         app:layout_constraintTop_toBottomOf="@id/text_view_instagram_info" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,18 +1,16 @@
 package dev.ykzza.posluga.data.repository
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 import dev.ykzza.posluga.data.entities.User
 import dev.ykzza.posluga.util.Constants
 import dev.ykzza.posluga.util.UiState
-import kotlinx.coroutines.tasks.await
 
 class AuthRepositoryImpl(
-    val auth: FirebaseAuth,
-    val db: FirebaseFirestore
+    private val auth: FirebaseAuth,
+    private val db: FirebaseFirestore
 ): AuthRepository {
 
     override fun signUp(
@@ -24,7 +22,7 @@ class AuthRepositoryImpl(
         auth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener { authResult ->
                 userData.id = authResult.user?.uid ?: ""
-                updateUserData(
+                saveUserToDb(
                     userData
                 ) { uiState ->
                     when(uiState) {
@@ -81,14 +79,14 @@ class AuthRepositoryImpl(
                     val firebaseUser = auth.currentUser
                     if (firebaseUser != null) {
                         if (isNewUser == true) {
-                            updateUserData(
+                            saveUserToDb(
                                 User(
                                     firebaseUser.uid,
                                     firebaseUser.displayName.toString(),
                                     "",
                                     "",
                                     "",
-                                    ""
+                                    firebaseUser.photoUrl.toString()
                                 )
                             ) { uiState ->
                                 when(uiState) {
@@ -143,7 +141,7 @@ class AuthRepositoryImpl(
             }
     }
 
-    override fun updateUserData(userData: User, result: (UiState<String>) -> Unit) {
+    override fun saveUserToDb(userData: User, result: (UiState<String>) -> Unit) {
         db.collection(Constants.USER_COLLECTION).document(userData.id).set(userData)
             .addOnSuccessListener {
                 result.invoke(
@@ -157,6 +155,5 @@ class AuthRepositoryImpl(
                     )
                 )
             }
-
     }
 }

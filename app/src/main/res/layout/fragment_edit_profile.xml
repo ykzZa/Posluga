@@ -1,10 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.menu.profile.EditProfileFragment">
+
+    <ScrollView
+        android:id="@+id/scroll_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@id/button_update_data"
+        app:layout_constraintTop_toBottomOf="@id/button_back">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/image_view_profile_pic"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_profile_grey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:src="@drawable/ic_camera"
+                app:layout_constraintBottom_toBottomOf="@id/image_view_profile_pic"
+                app:layout_constraintEnd_toEndOf="@id/image_view_profile_pic" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_remove_profile_picture"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="@color/black"
+                android:fontFamily="@font/nunitosans_7pt_extra_bold"
+                android:text="@string/button_remove_photo_text"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:cornerRadius="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/image_view_profile_pic" />
+
+            <ProgressBar
+                android:id="@+id/progress_bar_remove"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="8dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/button_remove_profile_picture"
+                app:layout_constraintEnd_toEndOf="@id/button_remove_profile_picture"
+                app:layout_constraintStart_toStartOf="@id/button_remove_profile_picture"
+                app:layout_constraintTop_toTopOf="@id/button_remove_profile_picture" />
+
+            <TextView
+                android:id="@+id/text_view_name"
+                style="@style/textViewEditTextLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/name_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button_remove_profile_picture" />
+
+            <EditText
+                android:id="@+id/edit_text_name"
+                style="@style/inputEditTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:drawableLeft="@drawable/ic_profile"
+                android:hint="@string/name_edit_text_hint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_name" />
+
+            <TextView
+                android:id="@+id/text_view_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:fontFamily="@font/nunitosans_7pt_bold"
+                android:text="Details"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_text_name" />
+
+            <TextView
+                android:id="@+id/text_view_phone_info"
+                style="@style/textViewEditTextLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/phone_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_details" />
+
+            <EditText
+                android:id="@+id/edit_text_phone_number"
+                style="@style/inputEditTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:drawableLeft="@drawable/ic_phone"
+                android:hint="@string/edit_text_phone_hint_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_phone_info" />
+
+            <TextView
+                android:id="@+id/text_view_telegram_info"
+                style="@style/textViewEditTextLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/telegram_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_text_phone_number" />
+
+            <EditText
+                android:id="@+id/edit_text_telegram"
+                style="@style/inputEditTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:drawableLeft="@drawable/ic_telegram_logo_24"
+                android:hint="@string/edit_text_telegram_hint_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_telegram_info" />
+
+
+            <TextView
+                android:id="@+id/text_view_instagram_info"
+                style="@style/textViewEditTextLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/instagram_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_text_telegram" />
+
+            <EditText
+                android:id="@+id/edit_text_instagram"
+                style="@style/inputEditTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:drawableLeft="@drawable/ic_instagram_logo_24"
+                android:hint="@string/edit_text_instagram_hint_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_instagram_info" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/button_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/black" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar_update"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/button_update_data"
+        app:layout_constraintEnd_toEndOf="@id/button_update_data"
+        app:layout_constraintStart_toStartOf="@id/button_update_data"
+        app:layout_constraintTop_toTopOf="@id/button_update_data" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_update_data"
@@ -20,5 +211,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

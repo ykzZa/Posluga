@@ -55,6 +55,7 @@ class RegisterFragment : Fragment() {
         binding.editTextName.text.toString(),
         "",
         "",
+        "",
         ""
     )
 

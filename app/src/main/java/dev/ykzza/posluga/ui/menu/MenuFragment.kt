@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import dev.ykzza.posluga.R
 import dev.ykzza.posluga.databinding.FragmentMenuBinding
+import dev.ykzza.posluga.ui.auth.AuthViewModel
 import dev.ykzza.posluga.util.makeViewGone
 import dev.ykzza.posluga.util.showView
 
@@ -24,6 +26,7 @@ class MenuFragment : Fragment() {
     private val firebaseAuth: FirebaseAuth
         get() = FirebaseAuth.getInstance()
 
+    private lateinit var viewModel: AuthViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +37,7 @@ class MenuFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel = ViewModelProvider(this)[AuthViewModel::class.java]
         setOnClickListeners()
         val currentUser = firebaseAuth.currentUser
         if (currentUser != null) {
@@ -70,7 +74,10 @@ class MenuFragment : Fragment() {
     }
 
     private fun onProfileButtonClick() {
-        findNavController().navigate(R.id.action_menuFragment_to_profileFragment)
+        val action = MenuFragmentDirections.actionMenuFragmentToProfileFragment(
+            firebaseAuth.uid ?: ""
+        )
+        findNavController().navigate(action)
     }
 
     private fun onServicesButtonClick() {
@@ -94,8 +101,9 @@ class MenuFragment : Fragment() {
     }
 
     private fun onLogOutButtonClick() {
-        firebaseAuth.signOut()
-        updateUiForGuest()
+        viewModel.signOut {
+            updateUiForGuest()
+        }
     }
 
     private fun updateUiForUser() {

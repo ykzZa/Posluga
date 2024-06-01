@@ -7,4 +7,13 @@ data class User(
     val instagram: String,
     val telegram: String,
     val photoUrl: String
-)
+){
+    constructor(): this(
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+    )
+}

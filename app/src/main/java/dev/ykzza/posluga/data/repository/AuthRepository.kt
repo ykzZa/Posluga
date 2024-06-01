@@ -7,18 +7,35 @@ import dev.ykzza.posluga.util.UiState
 
 interface AuthRepository {
 
-    fun signUp(userData: User, email: String, password: String, result: (UiState<String>) -> Unit)
+    fun signUp(
+        userData: User,
+        email: String,
+        password: String,
+        result: (UiState<String>) -> Unit
+    )
 
-    fun signIn(email: String, password: String, result: (UiState<String>) -> Unit)
+    fun signIn(
+        email: String,
+        password: String,
+        result: (UiState<String>) -> Unit
+    )
 
     fun signInWithGoogle(
         account: GoogleSignInAccount,
         result: (UiState<String>) -> Unit
     )
 
-    fun signOut(result: () -> Unit)
+    fun signOut(
+        result: () -> Unit
+    )
 
-    fun recoverPassword(email: String, result: (UiState<String>) -> Unit)
+    fun recoverPassword(
+        email: String,
+        result: (UiState<String>) -> Unit
+    )
 
-    fun updateUserData(userData: User, result: (UiState<String>) -> Unit)
+    fun saveUserToDb(
+        userData: User,
+        result: (UiState<String>) -> Unit
+    )
 }
