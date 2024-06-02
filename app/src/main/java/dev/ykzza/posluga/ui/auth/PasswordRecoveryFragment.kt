@@ -35,6 +35,10 @@ class PasswordRecoveryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProvider(this)[AuthViewModel::class.java]
         observeViewModel()
+        setOnClickListeners()
+    }
+
+    private fun setOnClickListeners() {
         binding.apply {
             buttonRecover.setOnClickListener {
                 viewModel.recoverPassword(editTextEmail.text.toString())

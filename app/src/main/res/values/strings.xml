@@ -50,5 +50,7 @@
     <string name="edit_text_instagram_hint_text">Write you instagram tag</string>
     <string name="edit_text_telegram_hint_text">Write your telegram tag</string>
     <string name="button_remove_photo_text">Remove photo</string>
+    <string name="button_create_project_text">Create a project</string>
+    <string name="button_create_service_text">Create a service</string>
 
 </resources>

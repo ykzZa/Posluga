@@ -1,7 +1,6 @@
 package dev.ykzza.posluga.ui.menu
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,59 +49,31 @@ class MenuFragment : Fragment() {
     private fun setOnClickListeners() {
         binding.apply {
             buttonProfile.setOnClickListener {
-                onProfileButtonClick()
+                val action = MenuFragmentDirections.actionMenuFragmentToProfileFragment(
+                    firebaseAuth.uid ?: ""
+                )
+                findNavController().navigate(action)
             }
             buttonServices.setOnClickListener {
-                onServicesButtonClick()
+                findNavController().navigate(R.id.action_menuFragment_to_myServicesFragment)
             }
             buttonCreatedProjects.setOnClickListener {
-                onProjectsButtonClick()
+                findNavController().navigate(R.id.action_menuFragment_to_myProjectsFragment)
             }
             buttonSettings.setOnClickListener {
-                onSettingsButtonClick()
+                findNavController().navigate(R.id.action_menuFragment_to_settingsFragment)
             }
             buttonAbout.setOnClickListener {
-                onAboutButtonClick()
+                findNavController().navigate(R.id.action_menuFragment_to_aboutFragment)
             }
             buttonSignIn.setOnClickListener {
-                onSignInButtonClick()
+                findNavController().navigate(R.id.action_menuFragment_to_loginFragment)
             }
             buttonLogout.setOnClickListener {
-                onLogOutButtonClick()
+                viewModel.signOut {
+                    updateUiForGuest()
+                }
             }
-        }
-    }
-
-    private fun onProfileButtonClick() {
-        val action = MenuFragmentDirections.actionMenuFragmentToProfileFragment(
-            firebaseAuth.uid ?: ""
-        )
-        findNavController().navigate(action)
-    }
-
-    private fun onServicesButtonClick() {
-        findNavController().navigate(R.id.action_menuFragment_to_myServicesFragment)
-    }
-
-    private fun onProjectsButtonClick() {
-        findNavController().navigate(R.id.action_menuFragment_to_myProjectsFragment)
-    }
-
-    private fun onSettingsButtonClick() {
-        findNavController().navigate(R.id.action_menuFragment_to_settingsFragment)
-    }
-
-    private fun onAboutButtonClick() {
-        findNavController().navigate(R.id.action_menuFragment_to_aboutFragment)
-    }
-
-    private fun onSignInButtonClick() {
-        findNavController().navigate(R.id.action_menuFragment_to_loginFragment)
-    }
-
-    private fun onLogOutButtonClick() {
-        viewModel.signOut {
-            updateUiForGuest()
         }
     }
 
