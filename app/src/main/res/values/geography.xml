@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="states">
+        <item>Avtonomna Respublika Krym</item>
+        <item>Vinnytska</item>
+        <item>Volynska</item>
+        <item>Dnipropetrovska</item>
+        <item>Donetska</item>
+        <item>Zhytomyrskа</item>
+        <item>Zakarpatska</item>
+        <item>Zaporizka</item>
+        <item>Ivano-Frankivska</item>
+        <item>Kyivska</item>
+        <item>Kirovohradska</item>
+        <item>Luhanska</item>
+        <item>Lvivska</item>
+        <item>Mykolaivska</item>
+        <item>Odeska</item>
+        <item>Poltavska</item>
+        <item>Rivnenska</item>
+        <item>Sumska</item>
+        <item>Ternopilska</item>
+        <item>Kharkivska</item>
+        <item>Khersonska</item>
+        <item>Khmelnytska</item>
+        <item>Cherkaska</item>
+        <item>Chernivetska</item>
+        <item>Chernihivska</item>
+    </string-array>
+
+    <string-array name="avtonomna_respublika_krym_cities">
+        <item>Simferopol</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="vinnytska_cities">
+        <item>Vinnytsia</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="volynska_cities">
+        <item>Lutsk</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="dnipropetrovska_cities">
+        <item>Dnipro</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="donetska_cities">
+        <item>Donetsk</item>
+        <item>Kramatorsk</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="zhytomyrska_cities">
+        <item>Zhytomyr</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="zakarpatska_cities">
+        <item>Uzhhorod</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="zaporizka_cities">
+        <item>Zaporizhzhia</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="ivano_frankivska_cities">
+        <item>Ivano-Frankivsk</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="kyivska_cities">
+        <item>Kyiv</item>
+        <item>Baryshivka</item>
+        <item>Bila Tserkva</item>
+        <item>Bohuslav</item>
+        <item>Boryspil</item>
+        <item>Borodianka</item>
+        <item>Brovary</item>
+        <item>Vasylkiv</item>
+        <item>Vyshhorod</item>
+        <item>Volodarka</item>
+        <item>Zghurivka</item>
+        <item>Іvankiv</item>
+        <item>Kaharlyk</item>
+        <item>Makariv</item>
+        <item>Myronivka</item>
+        <item>Obukhiv</item>
+        <item>Pereiaslav-Khmelnytskyi</item>
+        <item>Krasiatychi</item>
+        <item>Rokytne</item>
+        <item>Skvyra</item>
+        <item>Stavyshche</item>
+        <item>Tarashcha</item>
+        <item>Tetiiv</item>
+        <item>Fastiv</item>
+        <item>Yahotyn</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="kirovohradska_cities">
+        <item>Kropyvnytskyi</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="luhanska_cities">
+        <item>Luhansk</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="lvivska_cities">
+        <item>Lviv</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="mykolaivska_cities">
+        <item>Mykolaiv</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="odeska_cities">
+        <item>Odesa</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="poltavska_cities">
+        <item>Poltava</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="rivnenska_cities">
+        <item>Rivne</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="sumska_cities">
+        <item>Sumy</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="ternopilska_cities">
+        <item>Ternopil</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="kharkivska_cities">
+        <item>Kharkiv</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="khersonska_cities">
+        <item>Kherson</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="khmelnytska_cities">
+        <item>Khmelnytskyi</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="cherkaska_cities">
+        <item>Cherkasy</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="chernivetska_cities">
+        <item>Chernivtsi</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="chernihivska_cities">
+        <item>Chernihiv</item>
+        <item>Bakhmach</item>
+        <item>Bobrovytsia</item>
+        <item>Borzna</item>
+        <item>Varva</item>
+        <item>Horodnia</item>
+        <item>Ichnia</item>
+        <item>Kozelets</item>
+        <item>Korop</item>
+        <item>Koriukivka</item>
+        <item>Kulykivka</item>
+        <item>Mena</item>
+        <item>Nizhyn</item>
+        <item>Novhorod-Siverskyi</item>
+        <item>Nosivka</item>
+        <item>Pryluky</item>
+        <item>Ripky</item>
+        <item>Semenivka</item>
+        <item>Sosnytsia</item>
+        <item>Sribne</item>
+        <item>Talalaivka</item>
+        <item>Shchors</item>
+        <item>Other</item>
+    </string-array>
+
+</resources>

@@ -1,14 +1,11 @@
 package dev.ykzza.posluga.data.repository
 
 import android.net.Uri
-import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.toObject
 import com.google.firebase.storage.StorageReference
 import dev.ykzza.posluga.data.entities.User
 import dev.ykzza.posluga.util.Constants
 import dev.ykzza.posluga.util.UiState
-import kotlinx.coroutines.tasks.await
 
 class UserRepositoryImpl(
     private val db: FirebaseFirestore,
@@ -165,6 +162,47 @@ class UserRepositoryImpl(
             }
         }
     }
+
+    override fun getUserServiceCount(userId: String, result: (UiState<Int>) -> Unit) {
+        db.collection(Constants.SERVICE_COLLECTION)
+            .whereEqualTo("authorId", userId).get()
+            .addOnSuccessListener {  querySnapshot ->
+                val serviceCount = querySnapshot.size()
+                result.invoke(
+                    UiState.Success(
+                        serviceCount
+                    )
+                )
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Error(
+                        "Failed to load services"
+                    )
+                )
+            }
+    }
+
+    override fun getUserProjectCount(userId: String, result: (UiState<Int>) -> Unit) {
+        db.collection(Constants.PROJECT_COLLECTION)
+            .whereEqualTo("authorId", userId).get()
+            .addOnSuccessListener {  querySnapshot ->
+                val serviceCount = querySnapshot.size()
+                result.invoke(
+                    UiState.Success(
+                        serviceCount
+                    )
+                )
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Error(
+                        "Failed to load projects"
+                    )
+                )
+            }
+    }
+
 
     override fun updateUserData(userId: String, updates: HashMap<String, Any>, result: (UiState<String>) -> Unit) {
         db.collection(Constants.USER_COLLECTION).document(userId).update(updates)

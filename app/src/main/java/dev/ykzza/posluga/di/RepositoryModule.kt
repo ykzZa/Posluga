@@ -9,6 +9,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.ykzza.posluga.data.repository.AuthRepository
 import dev.ykzza.posluga.data.repository.AuthRepositoryImpl
+import dev.ykzza.posluga.data.repository.ProjectRepository
+import dev.ykzza.posluga.data.repository.ProjectRepositoryImpl
+import dev.ykzza.posluga.data.repository.ServiceRepository
+import dev.ykzza.posluga.data.repository.ServiceRepositoryImpl
 import dev.ykzza.posluga.data.repository.UserRepository
 import dev.ykzza.posluga.data.repository.UserRepositoryImpl
 import javax.inject.Singleton
@@ -33,5 +37,23 @@ object RepositoryModule {
         storage: StorageReference
     ): UserRepository {
         return UserRepositoryImpl(db, storage)
+    }
+
+    @Provides
+    @Singleton
+    fun provideServiceRepository(
+        db: FirebaseFirestore,
+        storage: StorageReference
+    ): ServiceRepository {
+        return ServiceRepositoryImpl(db, storage)
+    }
+
+    @Provides
+    @Singleton
+    fun provideProjectRepository(
+        db: FirebaseFirestore,
+        storage: StorageReference
+    ): ProjectRepository {
+        return ProjectRepositoryImpl(db, storage)
     }
 }

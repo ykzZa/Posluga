@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import dev.ykzza.posluga.R
 import dev.ykzza.posluga.databinding.FragmentCreatePostBinding
 
 @AndroidEntryPoint
@@ -34,10 +35,10 @@ class CreatePostFragment : Fragment() {
                 findNavController().popBackStack()
             }
             buttonCreateProject.setOnClickListener {
-
+                findNavController().navigate(R.id.action_createPostFragment_to_createProjectFragment)
             }
             buttonCreateService.setOnClickListener {
-
+                findNavController().navigate(R.id.action_createPostFragment_to_createServiceFragment)
             }
         }
     }

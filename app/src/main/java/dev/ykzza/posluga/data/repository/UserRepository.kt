@@ -40,4 +40,14 @@ interface UserRepository {
         userId: String,
         result: (UiState<String>) -> Unit
     )
+
+    fun getUserServiceCount(
+        userId: String,
+        result: (UiState<Int>) -> Unit
+    )
+
+    fun getUserProjectCount(
+        userId: String,
+        result: (UiState<Int>) -> Unit
+    )
 }

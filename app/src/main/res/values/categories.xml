@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="categories">
+        <item>Tutoring</item>
+        <item>Building works</item>
+        <item>Equipment repair</item>
+        <item>Handyman</item>
+        <item>Cleaning</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="other_subcategory">
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="tutoring_subcategory">
+        <item>School tutor</item>
+        <item>Driving instructor</item>
+        <item>Foreign languages tutor</item>
+        <item>Music tutor</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="building_works_subcategory">
+        <item>Concrete works</item>
+        <item>Welding works</item>
+        <item>Bricklaying</item>
+        <item>Dismantling rubble</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="equipment_repair_subcategory">
+        <item>Repair of large appliances</item>
+        <item>Repair of small appliances</item>
+        <item>Repair of mobile phones</item>
+        <item>Repair of laptops</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="handyman_subcategory">
+        <item>Plumber</item>
+        <item>Electrician</item>
+        <item>Woodworker</item>
+        <item>Man for a hour</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="cleaning_subcategory">
+        <item>Apartment cleaning</item>
+        <item>House cleaning</item>
+        <item>Cleaning the territory</item>
+        <item>Disinsecting</item>
+        <item>Other</item>
+    </string-array>
+
+</resources>

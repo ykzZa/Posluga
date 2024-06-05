@@ -20,6 +20,39 @@
     <string name="menu_title_text">Welcome to Posluga!</string>
     <string name="menu_subtitle_text">Please log in to your own account to get the full functionality of the application: create services, projects, communicate in the application, etc.</string>
 
+    <!-- Edit Profile Fragment Special -->
+    <string name="edit_text_phone_hint_text">Write your phone number: ex. 012 345 6789</string>
+    <string name="edit_text_instagram_hint_text">Write you instagram tag</string>
+    <string name="edit_text_telegram_hint_text">Write your telegram tag</string>
+    <string name="button_remove_photo_text">Remove photo</string>
+
+    <!-- Service and Project Fragment Special -->
+    <string name="button_create_project_text">Create a project</string>
+    <string name="button_create_service_text">Create a service</string>
+    <string name="create_service_title_text">Create a service</string>
+    <string name="service_title_text">Service title</string>
+    <string name="create_service_subtitle_text">Write everything in detail</string>
+    <string name="edit_text_service_title_hint">Write service title, ex. Math tutoring</string>
+    <string name="description_text">Description</string>
+    <string name="edit_text_service_description_hint">Write description, ex: I work with schoolchildren and studens</string>
+    <string name="images_text">Images</string>
+    <string name="category_text">Category</string>
+    <string name="drop_down_menu_category_text">Choose category</string>
+    <string name="subcategory_text">Subcategory</string>
+    <string name="drop_down_menu_subcategory_text">Choose subcategory</string>
+    <string name="state_text">State</string>
+    <string name="drop_down_menu_state_text">Choose state</string>
+    <string name="city_text">City</string>
+    <string name="drop_down_menu_city_text">Choose city</string>
+    <string name="edit_text_service_price_hint">Write price</string>
+    <string name="price_text">Price</string>
+    <string name="create_project_title_text">Create a project</string>
+    <string name="create_project_subtitle_text">Write everything in detail</string>
+    <string name="project_title_text">Project title</string>
+    <string name="edit_text_project_title_hint">Write title, ex: I need to repaeir iPhone 11</string>
+    <string name="edit_text_project_description_hint">Write description, ex: FaceID isn\'t working</string>
+
+
     <!-- General -->
     <string name="email_text">Email</string>
     <string name="password_text">Password</string>
@@ -44,13 +77,10 @@
     <string name="name_edit_text_hint">Write your name</string>
     <string name="phone_text">Mobile Phone</string>
 
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="edit_text_phone_hint_text">Write your phone number: ex. 012 345 6789</string>
-    <string name="edit_text_instagram_hint_text">Write you instagram tag</string>
-    <string name="edit_text_telegram_hint_text">Write your telegram tag</string>
-    <string name="button_remove_photo_text">Remove photo</string>
-    <string name="button_create_project_text">Create a project</string>
-    <string name="button_create_service_text">Create a service</string>
+
 
 </resources>
