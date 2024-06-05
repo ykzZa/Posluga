@@ -43,6 +43,29 @@ class ServiceRepositoryImpl(
             }
     }
 
+    override fun getServices(result: (UiState<List<Service>>) -> Unit) {
+        db.collection(Constants.SERVICE_COLLECTION).get()
+            .addOnSuccessListener { querySnapshot ->
+                val services = mutableListOf<Service>()
+                for (document in querySnapshot) {
+                    val service = document.toObject(Service::class.java)
+                    services.add(service)
+                }
+                result.invoke(
+                    UiState.Success(
+                        services
+                    )
+                )
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Error(
+                        it.localizedMessage ?: "Oops, something went wrong"
+                    )
+                )
+            }
+    }
+
     override suspend fun uploadImages(
         userId: String,
         imagesUrl: List<Uri>,
