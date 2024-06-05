@@ -4,6 +4,7 @@ import android.net.Uri
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.StorageReference
 import dev.ykzza.posluga.data.entities.Project
+import dev.ykzza.posluga.data.entities.Service
 import dev.ykzza.posluga.util.Constants
 import dev.ykzza.posluga.util.UiState
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +32,29 @@ class ProjectRepositoryImpl(
                 result.invoke(
                     UiState.Success(
                         "Project has been added successfully."
+                    )
+                )
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Error(
+                        it.localizedMessage ?: "Oops, something went wrong"
+                    )
+                )
+            }
+    }
+
+    override fun getProjects(result: (UiState<List<Project>>) -> Unit) {
+        db.collection(Constants.PROJECT_COLLECTION).get()
+            .addOnSuccessListener { querySnapshot ->
+                val projects = mutableListOf<Project>()
+                for (document in querySnapshot) {
+                    val project = document.toObject(Project::class.java)
+                    projects.add(project)
+                }
+                result.invoke(
+                    UiState.Success(
+                        projects
                     )
                 )
             }
