@@ -1,7 +1,6 @@
 package dev.ykzza.posluga.ui.menu.profile
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,6 +46,9 @@ class ProfileFragment : Fragment() {
         setOnClickListeners()
         hideUi()
         observeViewModel()
+        viewModel.getStatistic(
+            args.userId
+        )
         viewModel.getUserData(
             args.userId
         )
@@ -97,12 +99,51 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
+        viewModel.projectStats.observe(viewLifecycleOwner) { uiState ->
+            when(uiState) {
+                is UiState.Error -> {
+                    binding.apply {
+                        statisticContainer.hideView()
+                        showToast(uiState.errorMessage)
+                    }
+                }
+                is UiState.Loading -> {
+
+                }
+                is UiState.Success -> {
+                    binding.apply {
+                        statisticContainer.showView()
+                        textViewProjectsCount.text = "${uiState.data}\nprojects"
+                    }
+                }
+            }
+        }
+        viewModel.serviceStats.observe(viewLifecycleOwner) { uiState ->
+            when(uiState) {
+                is UiState.Error -> {
+                    binding.apply {
+                        statisticContainer.hideView()
+                        showToast(uiState.errorMessage)
+                    }
+                }
+                is UiState.Loading -> {
+
+                }
+                is UiState.Success -> {
+                    binding.apply {
+                        statisticContainer.showView()
+                        textViewServicesCount.text = "${uiState.data}\nservices"
+                    }
+                }
+            }
+        }
     }
 
     private fun hideUi() {
         binding.apply {
             buttonEdit.hideView()
             imageViewProfilePic.hideView()
+            statisticContainer.hideView()
             textViewDetails.hideView()
             imageViewPhone.hideView()
             imageViewTelegram.hideView()
@@ -117,6 +158,7 @@ class ProfileFragment : Fragment() {
         binding.apply {
             imageViewProfilePic.showView()
             textViewDetails.showView()
+            statisticContainer.showView()
             imageViewPhone.showView()
             imageViewTelegram.showView()
             imageViewInstagram.showView()

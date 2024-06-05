@@ -1,7 +1,6 @@
 package dev.ykzza.posluga.ui.menu.profile
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -32,6 +31,14 @@ class UserViewModel @Inject constructor(
     val imageUri: LiveData<Uri>
         get() = _imageUri
 
+    private val _projectStats = MutableLiveData<UiState<Int>>()
+    val projectStats: LiveData<UiState<Int>>
+        get() = _projectStats
+
+    private val _serviceStats = MutableLiveData<UiState<Int>>()
+    val serviceStats: LiveData<UiState<Int>>
+        get() = _serviceStats
+
     fun removeProfilePicture(userId: String) {
         _pictureDeleted.value = UiState.Loading
         repository.removeProfilePic(userId) {
@@ -41,7 +48,7 @@ class UserViewModel @Inject constructor(
 
     fun updateUser(userId: String, updates: HashMap<String, Any>) {
         _dataUpdated.value = UiState.Loading
-        if(imageUri.value == null) {
+        if(_imageUri.value == null) {
             repository.updateUserData(
                 userId,
                 updates
@@ -50,7 +57,7 @@ class UserViewModel @Inject constructor(
             }
         } else {
             repository.updateUserDataWithImage(
-                imageUri.value!!,
+                _imageUri.value!!,
                 userId,
                 updates
             ) {
@@ -70,5 +77,14 @@ class UserViewModel @Inject constructor(
 
     fun saveImageUri(imageUri: Uri) {
         _imageUri.value = imageUri
+    }
+
+    fun getStatistic(userId: String) {
+        repository.getUserProjectCount(userId) {
+            _projectStats.value = it
+        }
+        repository.getUserServiceCount(userId) {
+            _serviceStats.value = it
+        }
     }
 }

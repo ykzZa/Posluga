@@ -9,5 +9,22 @@
         android:id="@+id/createPostFragment"
         android:name="dev.ykzza.posluga.ui.create_post.CreatePostFragment"
         android:label="fragment_create_post"
-        tools:layout="@layout/fragment_create_post" />
+        tools:layout="@layout/fragment_create_post" >
+        <action
+            android:id="@+id/action_createPostFragment_to_createProjectFragment"
+            app:destination="@id/createProjectFragment" />
+        <action
+            android:id="@+id/action_createPostFragment_to_createServiceFragment"
+            app:destination="@id/createServiceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createProjectFragment"
+        android:name="dev.ykzza.posluga.ui.create_post.create_project.CreateProjectFragment"
+        android:label="fragment_create_project"
+        tools:layout="@layout/fragment_create_project" />
+    <fragment
+        android:id="@+id/createServiceFragment"
+        android:name="dev.ykzza.posluga.ui.create_post.create_service.CreateServiceFragment"
+        android:label="fragment_create_service"
+        tools:layout="@layout/fragment_create_service" />
 </navigation>
