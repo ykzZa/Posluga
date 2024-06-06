@@ -203,6 +203,26 @@ class UserRepositoryImpl(
             }
     }
 
+    override fun getUserReviewsCount(userId: String, result: (UiState<Int>) -> Unit) {
+        db.collection(Constants.REVIEWS_COLLECTION)
+            .whereEqualTo("userId", userId).get()
+            .addOnSuccessListener {  querySnapshot ->
+                val serviceCount = querySnapshot.size()
+                result.invoke(
+                    UiState.Success(
+                        serviceCount
+                    )
+                )
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Error(
+                        "Failed to load reviews"
+                    )
+                )
+            }
+    }
+
 
     override fun updateUserData(userId: String, updates: HashMap<String, Any>, result: (UiState<String>) -> Unit) {
         db.collection(Constants.USER_COLLECTION).document(userId).update(updates)

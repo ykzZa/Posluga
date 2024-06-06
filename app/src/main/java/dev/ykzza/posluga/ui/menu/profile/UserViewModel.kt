@@ -39,6 +39,10 @@ class UserViewModel @Inject constructor(
     val serviceStats: LiveData<UiState<Int>>
         get() = _serviceStats
 
+    private val _reviewsStats = MutableLiveData<UiState<Int>>()
+    val reviewsStats: LiveData<UiState<Int>>
+        get() = _reviewsStats
+
     fun removeProfilePicture(userId: String) {
         _pictureDeleted.value = UiState.Loading
         repository.removeProfilePic(userId) {
@@ -85,6 +89,9 @@ class UserViewModel @Inject constructor(
         }
         repository.getUserServiceCount(userId) {
             _serviceStats.value = it
+        }
+        repository.getUserReviewsCount(userId) {
+            _reviewsStats.value = it
         }
     }
 }
