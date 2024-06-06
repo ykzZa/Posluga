@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.ykzza.posluga.databinding.FragmentBrowseProjectsBinding
+import dev.ykzza.posluga.ui.home.HomeFragmentDirections
 import dev.ykzza.posluga.ui.home.search_dialog.SearchSettingsDialogFragment
 import dev.ykzza.posluga.util.UiState
 import dev.ykzza.posluga.util.hideView
@@ -106,7 +108,10 @@ class BrowseProjectsFragment : Fragment(),
 
 
     override fun onItemClick(projectId: String) {
-
+        val action = HomeFragmentDirections.actionHomeFragmentToProjectFragment(
+            projectId
+        )
+        findNavController().navigate(action)
     }
 
     override fun onSearchClick(

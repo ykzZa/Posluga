@@ -12,6 +12,11 @@ interface ProjectRepository {
         result: (UiState<String>) -> Unit
     )
 
+    fun getProject(
+        projectId: String,
+        result: (UiState<Project>) -> Unit
+    )
+
     fun getProjects(
         searchQuery: String?,
         descriptionSearch: Boolean,

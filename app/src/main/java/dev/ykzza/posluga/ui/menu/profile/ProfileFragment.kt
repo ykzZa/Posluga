@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import dev.ykzza.posluga.R
 import dev.ykzza.posluga.databinding.FragmentProfileBinding
+
 import dev.ykzza.posluga.util.UiState
 import dev.ykzza.posluga.util.hideView
 import dev.ykzza.posluga.util.showToast
@@ -137,6 +138,25 @@ class ProfileFragment : Fragment() {
                     binding.apply {
                         statisticContainer.showView()
                         textViewServicesCount.text = "${uiState.data}\nservices"
+                    }
+                }
+            }
+        }
+        viewModel.reviewsStats.observe(viewLifecycleOwner) { uiState ->
+            when(uiState) {
+                is UiState.Error -> {
+                    binding.apply {
+                        statisticContainer.hideView()
+                        showToast(uiState.errorMessage)
+                    }
+                }
+                is UiState.Loading -> {
+
+                }
+                is UiState.Success -> {
+                    binding.apply {
+                        statisticContainer.showView()
+                        textViewReviewsCount.text = "${uiState.data}\nreviews"
                     }
                 }
             }

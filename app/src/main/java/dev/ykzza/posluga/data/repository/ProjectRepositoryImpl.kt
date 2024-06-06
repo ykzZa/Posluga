@@ -47,6 +47,27 @@ class ProjectRepositoryImpl(
             }
     }
 
+    override fun getProject(projectId: String, result: (UiState<Project>) -> Unit) {
+        db.collection(Constants.PROJECT_COLLECTION).document(projectId).get()
+            .addOnSuccessListener {
+                val project = it.toObject(Project::class.java)
+                if (project != null) {
+                    result.invoke(
+                        UiState.Success(
+                            project
+                        )
+                    )
+                }
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Error(
+                        it.localizedMessage ?: "Oops, something went wrong"
+                    )
+                )
+            }
+    }
+
     override fun getProjects(
         searchQuery: String?,
         descriptionSearch: Boolean,
