@@ -32,6 +32,8 @@ class ServiceFragment : Fragment() {
     private lateinit var serviceViewModel: ServiceViewModel
     private lateinit var userViewModel: UserViewModel
 
+    private lateinit var userId: String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,7 +58,11 @@ class ServiceFragment : Fragment() {
                 findNavController().popBackStack()
             }
             userCard.setOnClickListener {
-
+                val action = ServiceFragmentDirections.actionServiceFragmentToProfileFragment2(
+                    userId,
+                    true
+                )
+                findNavController().navigate(action)
             }
         }
     }
@@ -109,6 +115,7 @@ class ServiceFragment : Fragment() {
                 }
                 is UiState.Success -> {
                     binding.apply {
+                        userId = uiState.data.id
                         authorName.text = uiState.data.nickname
                         Glide.with(this@ServiceFragment)
                             .load(uiState.data.photoUrl)
