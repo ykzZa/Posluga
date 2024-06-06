@@ -9,7 +9,7 @@
         android:id="@+id/homeFragment"
         android:name="dev.ykzza.posluga.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_serviceFragment"
             app:destination="@id/serviceFragment" />
@@ -21,10 +21,18 @@
         android:id="@+id/serviceFragment"
         android:name="dev.ykzza.posluga.ui.home.services.ServiceFragment"
         android:label="fragment_service"
-        tools:layout="@layout/fragment_service" />
+        tools:layout="@layout/fragment_service">
+        <argument
+            android:name="serviceId"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/projectFragment"
         android:name="dev.ykzza.posluga.ui.home.projects.ProjectFragment"
         android:label="fragment_project"
-        tools:layout="@layout/fragment_project" />
+        tools:layout="@layout/fragment_project">
+        <argument
+            android:name="projectId"
+            app:argType="string" />
+    </fragment>
 </navigation>

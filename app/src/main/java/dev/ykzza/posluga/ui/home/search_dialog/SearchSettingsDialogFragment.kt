@@ -1,4 +1,4 @@
-package dev.ykzza.posluga.ui.home
+package dev.ykzza.posluga.ui.home.search_dialog
 
 import android.os.Bundle
 import android.view.LayoutInflater

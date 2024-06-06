@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
 import dev.ykzza.posluga.databinding.FragmentBrowseProjectsBinding
-import dev.ykzza.posluga.ui.home.SearchSettingsDialogFragment
+import dev.ykzza.posluga.ui.home.search_dialog.SearchSettingsDialogFragment
 import dev.ykzza.posluga.util.UiState
 import dev.ykzza.posluga.util.hideView
 import dev.ykzza.posluga.util.showView
