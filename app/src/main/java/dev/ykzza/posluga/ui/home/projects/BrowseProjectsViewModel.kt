@@ -18,9 +18,27 @@ class BrowseProjectsViewModel @Inject constructor(
     val projectsLoaded: LiveData<UiState<List<Project>>>
         get() = _projectsLoaded
 
-    fun loadServices() {
+    fun loadProjects(
+        searchQuery: String? = null,
+        descriptionSearch: Boolean = false,
+        minPrice: Int? = null,
+        maxPrice: Int? = null,
+        category: String? = null,
+        subCategory: String? = null,
+        state: String? = null,
+        city: String? = null
+    ) {
         _projectsLoaded.value = UiState.Loading
-        repository.getProjects {
+        repository.getProjects(
+            searchQuery,
+            descriptionSearch,
+            minPrice,
+            maxPrice,
+            category,
+            subCategory,
+            state,
+            city,
+        ) {
             _projectsLoaded.value = it
         }
     }

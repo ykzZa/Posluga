@@ -2,7 +2,6 @@ package dev.ykzza.posluga.data.repository
 
 import android.net.Uri
 import dev.ykzza.posluga.data.entities.Project
-import dev.ykzza.posluga.data.entities.Service
 import dev.ykzza.posluga.util.UiState
 
 interface ProjectRepository {
@@ -14,6 +13,14 @@ interface ProjectRepository {
     )
 
     fun getProjects(
+        searchQuery: String?,
+        descriptionSearch: Boolean,
+        minPrice: Int?,
+        maxPrice: Int?,
+        category: String?,
+        subCategory: String?,
+        state: String?,
+        city: String?,
         result: (UiState<List<Project>>) -> Unit
     )
 

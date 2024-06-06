@@ -1,7 +1,6 @@
 package dev.ykzza.posluga.ui.home.projects
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,12 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
 import dev.ykzza.posluga.databinding.FragmentBrowseProjectsBinding
+import dev.ykzza.posluga.ui.home.SearchSettingsDialogFragment
 import dev.ykzza.posluga.util.UiState
 import dev.ykzza.posluga.util.hideView
 import dev.ykzza.posluga.util.showView
 
 @AndroidEntryPoint
-class BrowseProjectsFragment : Fragment(), ProjectsAdapter.OnItemClickListener {
+class BrowseProjectsFragment : Fragment(),
+    ProjectsAdapter.OnItemClickListener,
+    SearchSettingsDialogFragment.SearchDialogListener {
 
     private var _binding: FragmentBrowseProjectsBinding? = null
     private val binding: FragmentBrowseProjectsBinding
@@ -41,16 +43,19 @@ class BrowseProjectsFragment : Fragment(), ProjectsAdapter.OnItemClickListener {
         binding.recyclerViewProjects.adapter = recyclerViewAdapter
         observeViewModel()
         setOnClickListeners()
-        viewModel.loadServices()
+        viewModel.loadProjects()
     }
 
     private fun setOnClickListeners() {
-
+        binding.floatingButtonSearch.setOnClickListener {
+            val dialog = SearchSettingsDialogFragment(this)
+            dialog.show(parentFragmentManager, "SETTINGS_SEARCH_DIALOG")
+        }
     }
 
     private fun observeViewModel() {
         viewModel.projectsLoaded.observe(viewLifecycleOwner) { uiState ->
-            when(uiState) {
+            when (uiState) {
                 is UiState.Error -> {
                     showUi()
                     binding.apply {
@@ -58,17 +63,18 @@ class BrowseProjectsFragment : Fragment(), ProjectsAdapter.OnItemClickListener {
                         errorTextView.showView()
                     }
                 }
+
                 is UiState.Loading -> {
                     hideUi()
                     binding.apply {
                         progressBar.showView()
                     }
                 }
+
                 is UiState.Success -> {
                     binding.apply {
                         progressBar.hideView()
                     }
-                    Log.d("BrowseServicesFragment", uiState.data.toString())
                     recyclerViewAdapter.submitList(uiState.data)
                     showUi()
                 }
@@ -98,12 +104,36 @@ class BrowseProjectsFragment : Fragment(), ProjectsAdapter.OnItemClickListener {
         _binding = null
     }
 
+
+    override fun onItemClick(projectId: String) {
+
+    }
+
+    override fun onSearchClick(
+        searchRequest: String?,
+        descriptionSearch: Boolean,
+        category: String?,
+        subCategory: String?,
+        state: String?,
+        city: String?,
+        minPrice: Int?,
+        maxPrice: Int?
+    ) {
+        viewModel.loadProjects(
+            searchQuery = searchRequest,
+            descriptionSearch = descriptionSearch,
+            minPrice = minPrice,
+            maxPrice = maxPrice,
+            category = category,
+            subCategory = subCategory,
+            state = state,
+            city = city
+        )
+    }
+
     companion object {
 
         fun newInstance() = BrowseProjectsFragment()
     }
 
-    override fun onItemClick(projectId: String) {
-        Log.d("BrowseProjectsFragment", projectId)
-    }
 }

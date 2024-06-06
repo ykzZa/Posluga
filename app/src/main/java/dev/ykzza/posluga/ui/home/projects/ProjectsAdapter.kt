@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import dev.ykzza.posluga.R
 import dev.ykzza.posluga.data.entities.Project
 import dev.ykzza.posluga.databinding.ItemPostBinding
 
@@ -35,6 +36,10 @@ class ProjectsAdapter(
                     Glide.with(root)
                         .load(project.images[0])
                         .centerCrop()
+                        .into(previewImage)
+                } else {
+                    Glide.with(root)
+                        .load(R.drawable.baseline_image_24)
                         .into(previewImage)
                 }
                 titleTextView.text = project.title
