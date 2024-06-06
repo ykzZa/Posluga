@@ -13,6 +13,14 @@ interface ServiceRepository {
     )
 
     fun getServices(
+        searchQuery: String?,
+        descriptionSearch: Boolean,
+        minPrice: Int?,
+        maxPrice: Int?,
+        category: String?,
+        subCategory: String?,
+        state: String?,
+        city: String?,
         result: (UiState<List<Service>>) -> Unit
     )
 

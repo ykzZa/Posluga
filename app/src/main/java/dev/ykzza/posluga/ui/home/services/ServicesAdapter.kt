@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import dev.ykzza.posluga.R
 import dev.ykzza.posluga.data.entities.Service
 import dev.ykzza.posluga.databinding.ItemPostBinding
 
@@ -36,12 +37,21 @@ class ServicesAdapter(
                         .load(service.images[0])
                         .centerCrop()
                         .into(previewImage)
+                } else {
+                    Glide.with(root)
+                        .load(R.drawable.baseline_image_24)
+                        .into(previewImage)
                 }
                 titleTextView.text = service.title
                 geoTextView.text = service.city
                 dateTextView.text = service.date.dropLast(6)
                 timeTextView.text = service.date.takeLast(5)
-                priceTextView.text = "${service.price} hrn"
+                if(service.price == 0) {
+                    priceTextView.text = "Договірна"
+                } else {
+                    priceTextView.text = "${service.price} hrn"
+                }
+
 
                 root.setOnClickListener {
                     onServiceClickListener.onItemClick(
