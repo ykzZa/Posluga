@@ -80,6 +80,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
-
+    <string name="checkbox_search_description">Search in description</string>
+    <string name="edit_text_max_price_hint">Max price</string>
+    <string name="edit_text_min_price_hint">Min price</string>
 </resources>
