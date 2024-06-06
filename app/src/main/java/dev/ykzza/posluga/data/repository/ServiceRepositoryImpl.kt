@@ -1,8 +1,11 @@
 package dev.ykzza.posluga.data.repository
 
 import android.net.Uri
+import com.google.firebase.firestore.Filter
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.storage.StorageReference
+import dev.ykzza.posluga.data.entities.SearchResult
 import dev.ykzza.posluga.data.entities.Service
 import dev.ykzza.posluga.util.Constants
 import dev.ykzza.posluga.util.UiState
@@ -11,6 +14,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import me.xdrop.fuzzywuzzy.FuzzySearch
 
 class ServiceRepositoryImpl(
     private val db: FirebaseFirestore,
@@ -41,6 +45,166 @@ class ServiceRepositoryImpl(
                     )
                 )
             }
+    }
+
+    override fun getService(serviceId: String, result: (UiState<Service>) -> Unit) {
+        db.collection(Constants.SERVICE_COLLECTION).document(serviceId).get()
+            .addOnSuccessListener {
+                val service = it.toObject(Service::class.java)
+                if (service != null) {
+                    result.invoke(
+                        UiState.Success(
+                            service
+                        )
+                    )
+                }
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Error(
+                        it.localizedMessage ?: "Oops, something went wrong"
+                    )
+                )
+            }
+    }
+
+    override fun getServices(
+        searchQuery: String?,
+        descriptionSearch: Boolean,
+        minPrice: Int?,
+        maxPrice: Int?,
+        category: String?,
+        subCategory: String?,
+        state: String?,
+        city: String?,
+        result: (UiState<List<Service>>) -> Unit
+    ) {
+        val servicesRef =
+            db.collection(Constants.SERVICE_COLLECTION).orderBy("date", Query.Direction.DESCENDING)
+        val filterList = mutableListOf<Filter>()
+
+        if (category != null) {
+            filterList.add(
+                Filter.equalTo(
+                    "category", category
+                )
+            )
+        }
+        if (subCategory != null) {
+            filterList.add(
+                Filter.equalTo(
+                    "subCategory", subCategory
+                )
+            )
+        }
+        if (state != null) {
+            filterList.add(
+                Filter.equalTo(
+                    "state", state
+                )
+            )
+        }
+        if (city != null) {
+            filterList.add(
+                Filter.equalTo(
+                    "city",
+                    city
+                )
+            )
+        }
+        if (minPrice != null) {
+            filterList.add(
+                Filter.greaterThanOrEqualTo(
+                    "price",
+                    minPrice
+                )
+            )
+        }
+        if (maxPrice != null) {
+            filterList.add(
+                Filter.lessThanOrEqualTo(
+                    "price", maxPrice
+                )
+            )
+        }
+
+        val queryRef = servicesRef.where(
+            Filter.and(
+                *filterList.toTypedArray()
+            )
+        )
+
+        queryRef.get()
+            .addOnSuccessListener { querySnapshot ->
+                val services = mutableListOf<Service>()
+                for (document in querySnapshot) {
+                    val service = document.toObject(Service::class.java)
+                    services.add(service)
+                }
+                if (searchQuery != null) {
+                    filterServices(
+                        services,
+                        searchQuery,
+                        descriptionSearch
+                    ) { uiState ->
+                        if (uiState is UiState.Success) {
+                            result.invoke(
+                                UiState.Success(
+                                    uiState.data
+                                )
+                            )
+                        } else {
+                            result.invoke(
+                                UiState.Error(
+                                    "Oops, something went wrong"
+                                )
+                            )
+                        }
+                    }
+                } else {
+                    result.invoke(
+                        UiState.Success(
+                            services
+                        )
+                    )
+                }
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Error(
+                        it.localizedMessage ?: "Oops, something went wrong"
+                    )
+                )
+            }
+    }
+
+    private fun filterServices(
+        services: List<Service>,
+        searchQuery: String,
+        descriptionSearch: Boolean,
+        result: (UiState<List<Service>>) -> Unit
+    ) {
+        val lowerCaseQuery = searchQuery.lowercase()
+        val searchResults = services.mapNotNull { service ->
+            val titleMatchScore =
+                FuzzySearch.partialRatio(lowerCaseQuery, service.title.lowercase())
+            val descriptionMatchScore = if (descriptionSearch) {
+                FuzzySearch.partialRatio(lowerCaseQuery, service.description.lowercase())
+            } else {
+                0
+            }
+            if (titleMatchScore > 50 || descriptionMatchScore > 50) {
+                val highestScore = maxOf(titleMatchScore, descriptionMatchScore)
+                SearchResult(service, highestScore)
+            } else {
+                null
+            }
+        }
+        result.invoke(
+            UiState.Success(
+                searchResults.map { it.item }
+            )
+        )
     }
 
     override suspend fun uploadImages(

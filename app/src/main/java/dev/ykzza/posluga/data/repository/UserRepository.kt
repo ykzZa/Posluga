@@ -50,4 +50,9 @@ interface UserRepository {
         userId: String,
         result: (UiState<Int>) -> Unit
     )
+
+    fun getUserReviewsCount(
+        userId: String,
+        result: (UiState<Int>) -> Unit
+    )
 }

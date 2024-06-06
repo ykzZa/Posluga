@@ -13,5 +13,17 @@ data class Project(
     val city: String,
     var images: List<String> = listOf()
 ) {
-
+    constructor(): this(
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        0,
+        "",
+        "",
+        emptyList(),
+    )
 }

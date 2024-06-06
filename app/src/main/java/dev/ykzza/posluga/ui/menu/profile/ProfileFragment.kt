@@ -9,16 +9,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import dev.ykzza.posluga.R
 import dev.ykzza.posluga.databinding.FragmentProfileBinding
+
 import dev.ykzza.posluga.util.UiState
 import dev.ykzza.posluga.util.hideView
-import dev.ykzza.posluga.util.makeViewGone
 import dev.ykzza.posluga.util.showToast
 import dev.ykzza.posluga.util.showView
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
@@ -27,8 +25,6 @@ class ProfileFragment : Fragment() {
     private val binding: FragmentProfileBinding
         get() = _binding ?: throw RuntimeException("FragmentProfileBinding is null")
 
-    @Inject
-    lateinit var firebaseAuth: FirebaseAuth
     private lateinit var viewModel: UserViewModel
 
     private val args: ProfileFragmentArgs by navArgs()
@@ -45,6 +41,7 @@ class ProfileFragment : Fragment() {
         viewModel = ViewModelProvider(this)[UserViewModel::class.java]
         setOnClickListeners()
         hideUi()
+        hideEdit()
         observeViewModel()
         viewModel.getStatistic(
             args.userId
@@ -52,6 +49,14 @@ class ProfileFragment : Fragment() {
         viewModel.getUserData(
             args.userId
         )
+    }
+
+    private fun hideEdit() {
+        if(args.hideEdit) {
+            binding.buttonEdit.hideView()
+        } else {
+            binding.buttonEdit.showView()
+        }
     }
 
     private fun setOnClickListeners() {
@@ -137,6 +142,25 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
+        viewModel.reviewsStats.observe(viewLifecycleOwner) { uiState ->
+            when(uiState) {
+                is UiState.Error -> {
+                    binding.apply {
+                        statisticContainer.hideView()
+                        showToast(uiState.errorMessage)
+                    }
+                }
+                is UiState.Loading -> {
+
+                }
+                is UiState.Success -> {
+                    binding.apply {
+                        statisticContainer.showView()
+                        textViewReviewsCount.text = "${uiState.data}\nreviews"
+                    }
+                }
+            }
+        }
     }
 
     private fun hideUi() {
@@ -166,20 +190,7 @@ class ProfileFragment : Fragment() {
             textViewInstagramInfo.showView()
             textViewPhoneInfo.showView()
         }
-        updateEditButtonVisibility()
     }
-
-
-    private fun updateEditButtonVisibility() {
-        val currentUserId = firebaseAuth.currentUser?.uid
-        val userId = args.userId
-        if (currentUserId != userId) {
-            binding.buttonEdit.makeViewGone()
-        } else {
-            binding.buttonEdit.showView()
-        }
-    }
-
 
     override fun onDestroy() {
         super.onDestroy()

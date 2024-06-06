@@ -9,5 +9,48 @@
         android:id="@+id/homeFragment"
         android:name="dev.ykzza.posluga.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_serviceFragment"
+            app:destination="@id/serviceFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_projectFragment"
+            app:destination="@id/projectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/serviceFragment"
+        android:name="dev.ykzza.posluga.ui.home.services.ServiceFragment"
+        android:label="fragment_service"
+        tools:layout="@layout/fragment_service">
+        <argument
+            android:name="serviceId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_serviceFragment_to_profileFragment2"
+            app:destination="@id/profileFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/projectFragment"
+        android:name="dev.ykzza.posluga.ui.home.projects.ProjectFragment"
+        android:label="fragment_project"
+        tools:layout="@layout/fragment_project">
+        <argument
+            android:name="projectId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_projectFragment_to_profileFragment2"
+            app:destination="@id/profileFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment2"
+        android:name="dev.ykzza.posluga.ui.menu.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <argument
+            android:name="userId"
+            app:argType="string" />
+        <argument
+            android:name="hideEdit"
+            app:argType="boolean" />
+    </fragment>
 </navigation>

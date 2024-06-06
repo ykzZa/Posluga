@@ -1,7 +1,6 @@
 package dev.ykzza.posluga.ui.create_post.create_service
 
 import android.net.Uri
-import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -88,7 +87,7 @@ class ServiceViewModel @Inject constructor(
         price: String,
         listImages: List<String>
     ) {
-        if(validateData(title, description, price)) {
+        if(validateData(title, description)) {
             val service = Service(
                 "",
                 title,
@@ -97,7 +96,7 @@ class ServiceViewModel @Inject constructor(
                 _subCategory.value!!,
                 authorId,
                 date,
-                price.toInt(),
+                price.toIntOrNull() ?: 0,
                 _state.value!!,
                 _city.value!!
                 )
@@ -112,9 +111,8 @@ class ServiceViewModel @Inject constructor(
 
     private fun validateData(
         title: String,
-        description: String,
-        price: String
-    ): Boolean {
+        description: String
+        ): Boolean {
         if(title.isBlank()) {
             _servicePosted.value = UiState.Error(
                 "Title can't be blank"
@@ -136,12 +134,6 @@ class ServiceViewModel @Inject constructor(
         if(_state.value.isNullOrBlank() || _city.value.isNullOrBlank()) {
             _servicePosted.value = UiState.Error(
                 "You need to choose geo of service"
-            )
-            return false
-        }
-        if(price.isBlank() || !price.isDigitsOnly()) {
-            _servicePosted.value = UiState.Error(
-                "You need to enter a price"
             )
             return false
         }

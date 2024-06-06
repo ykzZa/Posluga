@@ -14,5 +14,17 @@ data class Service(
     val city: String,
     var images: List<String> = listOf()
 ) {
-
+    constructor(): this(
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        0,
+        "",
+        "",
+        emptyList(),
+    )
 }

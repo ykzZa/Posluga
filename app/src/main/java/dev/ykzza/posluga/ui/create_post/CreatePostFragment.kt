@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import dev.ykzza.posluga.R
 import dev.ykzza.posluga.databinding.FragmentCreatePostBinding
+import dev.ykzza.posluga.util.showToast
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CreatePostFragment : Fragment() {
@@ -16,6 +19,9 @@ class CreatePostFragment : Fragment() {
     private var _binding: FragmentCreatePostBinding? = null
     private val binding: FragmentCreatePostBinding
         get() = _binding ?: throw RuntimeException("FragmentCreatePostBinding is null")
+
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,10 +41,18 @@ class CreatePostFragment : Fragment() {
                 findNavController().popBackStack()
             }
             buttonCreateProject.setOnClickListener {
-                findNavController().navigate(R.id.action_createPostFragment_to_createProjectFragment)
+                if(firebaseAuth.currentUser != null) {
+                    findNavController().navigate(R.id.action_createPostFragment_to_createProjectFragment)
+                } else {
+                    showToast("You need to login!")
+                }
             }
             buttonCreateService.setOnClickListener {
-                findNavController().navigate(R.id.action_createPostFragment_to_createServiceFragment)
+                if(firebaseAuth.currentUser != null) {
+                    findNavController().navigate(R.id.action_createPostFragment_to_createServiceFragment)
+                } else {
+                    showToast("You need to login!")
+                }
             }
         }
     }

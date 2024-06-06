@@ -12,6 +12,23 @@ interface ProjectRepository {
         result: (UiState<String>) -> Unit
     )
 
+    fun getProject(
+        projectId: String,
+        result: (UiState<Project>) -> Unit
+    )
+
+    fun getProjects(
+        searchQuery: String?,
+        descriptionSearch: Boolean,
+        minPrice: Int?,
+        maxPrice: Int?,
+        category: String?,
+        subCategory: String?,
+        state: String?,
+        city: String?,
+        result: (UiState<List<Project>>) -> Unit
+    )
+
     suspend fun uploadImages(
         userId: String,
         imagesUrl: List<Uri>,
