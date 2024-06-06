@@ -22,6 +22,8 @@ import dev.ykzza.posluga.util.showToast
 import dev.ykzza.posluga.util.showView
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import javax.inject.Inject
+import javax.inject.Named
 
 @AndroidEntryPoint
 class CreateServiceFragment : Fragment(), ImagesAdapter.OnItemClickListener {
@@ -37,64 +39,30 @@ class CreateServiceFragment : Fragment(), ImagesAdapter.OnItemClickListener {
         ImagesAdapter(this)
     }
 
-    private val categories by lazy {
-        resources.getStringArray(R.array.categories)
-    }
-    private val subCategories = listOf(
-        R.array.tutoring_subcategory,
-        R.array.building_works_subcategory,
-        R.array.equipment_repair_subcategory,
-        R.array.handyman_subcategory,
-        R.array.cleaning_subcategory,
-        R.array.other_subcategory
-    )
-    private val states by lazy {
-        resources.getStringArray(R.array.states)
-    }
-    private val cities = listOf(
-        R.array.avtonomna_respublika_krym_cities,
-        R.array.vinnytska_cities,
-        R.array.volynska_cities,
-        R.array.dnipropetrovska_cities,
-        R.array.donetska_cities,
-        R.array.zhytomyrska_cities,
-        R.array.zakarpatska_cities,
-        R.array.zaporizka_cities,
-        R.array.ivano_frankivska_cities,
-        R.array.kyivska_cities,
-        R.array.kirovohradska_cities,
-        R.array.luhanska_cities,
-        R.array.lvivska_cities,
-        R.array.mykolaivska_cities,
-        R.array.odeska_cities,
-        R.array.poltavska_cities,
-        R.array.rivnenska_cities,
-        R.array.sumska_cities,
-        R.array.ternopilska_cities,
-        R.array.kharkivska_cities,
-        R.array.khersonska_cities,
-        R.array.khmelnytska_cities,
-        R.array.cherkaska_cities,
-        R.array.chernivetska_cities,
-        R.array.chernihivska_cities
-    )
+    @Inject
+    @Named("categories")
+    lateinit var categories: Array<String>
 
-    private val categoryAdapter by lazy {
-        ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.categories,
-            android.R.layout.simple_dropdown_item_1line
-        )
-    }
+    @Inject
+    @Named("subCategories")
+    lateinit var subCategories: Array<Int>
+
+    @Inject
+    @Named("states")
+    lateinit var states: Array<String>
+
+    @Inject
+    @Named("cities")
+    lateinit var cities: Array<Int>
+
+    @Inject
+    @Named("categoryAdapter")
+    lateinit var categoryAdapter: ArrayAdapter<CharSequence>
     private lateinit var subCategoryAdapter: ArrayAdapter<CharSequence>
 
-    private val statesAdapter by lazy {
-        ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.states,
-            android.R.layout.simple_dropdown_item_1line
-        )
-    }
+    @Inject
+    @Named("statesAdapter")
+    lateinit var statesAdapter: ArrayAdapter<CharSequence>
     private lateinit var citiesAdapter: ArrayAdapter<CharSequence>
 
     override fun onCreateView(

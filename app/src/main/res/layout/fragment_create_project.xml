@@ -153,7 +153,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
-
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_view_project_category">
@@ -162,7 +161,6 @@
                     android:id="@+id/auto_complete_text_category"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:background="@drawable/edit_text_background_rect"
                     android:inputType="none"
                     android:text="@string/drop_down_menu_category_text" />
@@ -194,7 +192,6 @@
                     android:id="@+id/auto_complete_text_subcategory"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:background="@drawable/edit_text_background_rect"
                     android:inputType="none"
                     android:text="@string/drop_down_menu_subcategory_text" />
@@ -226,7 +223,6 @@
                     android:id="@+id/auto_complete_text_state"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:background="@drawable/edit_text_background_rect"
                     android:inputType="none"
                     android:text="@string/drop_down_menu_state_text" />
@@ -258,7 +254,6 @@
                     android:id="@+id/auto_complete_text_city"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:background="@drawable/edit_text_background_rect"
                     android:inputType="none"
                     android:text="@string/drop_down_menu_city_text" />
