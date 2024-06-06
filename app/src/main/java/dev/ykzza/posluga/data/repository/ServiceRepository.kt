@@ -12,6 +12,11 @@ interface ServiceRepository {
         result: (UiState<String>) -> Unit
     )
 
+    fun getService(
+        serviceId: String,
+        result: (UiState<Service>) -> Unit
+    )
+
     fun getServices(
         searchQuery: String?,
         descriptionSearch: Boolean,

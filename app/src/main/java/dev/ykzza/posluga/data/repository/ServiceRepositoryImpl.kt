@@ -47,6 +47,27 @@ class ServiceRepositoryImpl(
             }
     }
 
+    override fun getService(serviceId: String, result: (UiState<Service>) -> Unit) {
+        db.collection(Constants.SERVICE_COLLECTION).document(serviceId).get()
+            .addOnSuccessListener {
+                val service = it.toObject(Service::class.java)
+                if (service != null) {
+                    result.invoke(
+                        UiState.Success(
+                            service
+                        )
+                    )
+                }
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Error(
+                        it.localizedMessage ?: "Oops, something went wrong"
+                    )
+                )
+            }
+    }
+
     override fun getServices(
         searchQuery: String?,
         descriptionSearch: Boolean,

@@ -83,4 +83,5 @@
     <string name="checkbox_search_description">Search in description</string>
     <string name="edit_text_max_price_hint">Max price</string>
     <string name="edit_text_min_price_hint">Min price</string>
+    <string name="open_user_profile_text">Open user profile</string>
 </resources>
