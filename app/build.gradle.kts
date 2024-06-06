@@ -75,4 +75,7 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.48")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
+
+    implementation("me.xdrop:fuzzywuzzy:1.2.0")
+
 }
