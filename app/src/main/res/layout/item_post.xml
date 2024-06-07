@@ -20,10 +20,10 @@
 
             <ImageView
                 android:id="@+id/preview_image"
-                android:src="@drawable/baseline_image_24"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_margin="8dp"
+                android:src="@drawable/baseline_image_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -34,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
+                android:ellipsize="end"
                 android:fontFamily="@font/nunitosans_7pt_extra_bold"
                 android:maxLines="1"
                 android:textSize="16sp"
@@ -46,7 +47,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
+                android:ellipsize="end"
                 android:fontFamily="@font/nunitosans_7pt_semi_bold"
+                android:maxLines="1"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@id/title_text_view"
                 app:layout_constraintStart_toStartOf="@id/title_text_view"
@@ -57,7 +60,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
+                android:ellipsize="end"
                 android:fontFamily="@font/nunitosans_7pt_regular"
+                android:maxLines="1"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@id/geo_text_view"
                 app:layout_constraintTop_toBottomOf="@id/geo_text_view" />
@@ -67,6 +72,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:fontFamily="@font/nunitosans_7pt_regular"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@id/date_text_view"
@@ -76,14 +83,16 @@
                 android:id="@+id/price_text_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="16dp"
-                android:gravity="end"
+                android:layout_marginEnd="8dp"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:fontFamily="@font/nunitosans_7pt_semi_bold"
+                android:gravity="end"
                 android:textSize="14sp"
-                app:layout_constraintStart_toEndOf="@id/time_text_view"
                 app:layout_constraintBottom_toBottomOf="@id/preview_image"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time_text_view" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
