@@ -143,25 +143,15 @@ class ProjectRepositoryImpl(
                     projects.add(project)
                 }
                 if (searchQuery != null) {
-                    filterProjects(
-                        projects,
-                        searchQuery,
-                        descriptionSearch
-                    ) { uiState ->
-                        if (uiState is UiState.Success) {
-                            result.invoke(
-                                UiState.Success(
-                                    uiState.data
-                                )
+                    result.invoke(
+                        UiState.Success(
+                            filterProjects(
+                                projects,
+                                searchQuery,
+                                descriptionSearch
                             )
-                        } else {
-                            result.invoke(
-                                UiState.Error(
-                                    "Oops, something went wrong"
-                                )
-                            )
-                        }
-                    }
+                        )
+                    )
                 } else {
                     result.invoke(
                         UiState.Success(
@@ -182,9 +172,8 @@ class ProjectRepositoryImpl(
     private fun filterProjects(
         projects: List<Project>,
         searchQuery: String,
-        descriptionSearch: Boolean,
-        result: (UiState<List<Project>>) -> Unit
-    ) {
+        descriptionSearch: Boolean
+    ): List<Project> {
         val lowerCaseQuery = searchQuery.lowercase()
         val searchResults = projects.mapNotNull { project ->
             val titleMatchScore =
@@ -201,11 +190,7 @@ class ProjectRepositoryImpl(
                 null
             }
         }
-        result.invoke(
-            UiState.Success(
-                searchResults.map { it.item }
-            )
-        )
+        return searchResults.map { it.item }
     }
 
     override suspend fun uploadImages(

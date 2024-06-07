@@ -9,10 +9,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import dev.ykzza.posluga.R
 import dev.ykzza.posluga.databinding.FragmentProfileBinding
-
 import dev.ykzza.posluga.util.UiState
 import dev.ykzza.posluga.util.hideView
 import dev.ykzza.posluga.util.showToast
@@ -26,6 +26,8 @@ class ProfileFragment : Fragment() {
         get() = _binding ?: throw RuntimeException("FragmentProfileBinding is null")
 
     private lateinit var viewModel: UserViewModel
+    private val firebaseAuth: FirebaseAuth
+        get() = FirebaseAuth.getInstance()
 
     private val args: ProfileFragmentArgs by navArgs()
 
@@ -52,7 +54,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun hideEdit() {
-        if(args.hideEdit) {
+        if(args.userId != firebaseAuth.uid) {
             binding.buttonEdit.hideView()
         } else {
             binding.buttonEdit.showView()
@@ -66,6 +68,12 @@ class ProfileFragment : Fragment() {
             }
             buttonEdit.setOnClickListener {
                 val action = ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment(
+                    args.userId
+                )
+                findNavController().navigate(action)
+            }
+            textViewReviewsCount.setOnClickListener {
+                val action = ProfileFragmentDirections.actionProfileFragmentToReviewsFragment(
                     args.userId
                 )
                 findNavController().navigate(action)

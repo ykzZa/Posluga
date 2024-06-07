@@ -55,4 +55,22 @@ interface UserRepository {
         userId: String,
         result: (UiState<Int>) -> Unit
     )
+
+    fun isServiceFavourite(
+        userId: String,
+        serviceId: String,
+        result: (UiState<Boolean>) -> Unit
+    )
+
+    fun favouritesChange(
+        userId: String,
+        serviceId: String,
+        changes: Boolean,
+        result: (UiState<String>) -> Unit
+    )
+
+    suspend fun getReviewsAuthors(
+        authorsIds: List<String>,
+        result: (UiState<List<User>>) -> Unit
+    )
 }

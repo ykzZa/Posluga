@@ -6,6 +6,7 @@ import com.google.firebase.storage.StorageReference
 import dev.ykzza.posluga.data.entities.User
 import dev.ykzza.posluga.util.Constants
 import dev.ykzza.posluga.util.UiState
+import kotlinx.coroutines.tasks.await
 
 class UserRepositoryImpl(
     private val db: FirebaseFirestore,
@@ -144,7 +145,7 @@ class UserRepositoryImpl(
             "photoUrl" to ""
         )
         updateUserData(userId, updates) { uiState ->
-            when(uiState) {
+            when (uiState) {
                 is UiState.Success -> {
                     result.invoke(
                         UiState.Success(
@@ -152,6 +153,7 @@ class UserRepositoryImpl(
                         )
                     )
                 }
+
                 else -> {
                     result.invoke(
                         UiState.Error(
@@ -166,7 +168,7 @@ class UserRepositoryImpl(
     override fun getUserServiceCount(userId: String, result: (UiState<Int>) -> Unit) {
         db.collection(Constants.SERVICE_COLLECTION)
             .whereEqualTo("authorId", userId).get()
-            .addOnSuccessListener {  querySnapshot ->
+            .addOnSuccessListener { querySnapshot ->
                 val serviceCount = querySnapshot.size()
                 result.invoke(
                     UiState.Success(
@@ -186,7 +188,7 @@ class UserRepositoryImpl(
     override fun getUserProjectCount(userId: String, result: (UiState<Int>) -> Unit) {
         db.collection(Constants.PROJECT_COLLECTION)
             .whereEqualTo("authorId", userId).get()
-            .addOnSuccessListener {  querySnapshot ->
+            .addOnSuccessListener { querySnapshot ->
                 val serviceCount = querySnapshot.size()
                 result.invoke(
                     UiState.Success(
@@ -206,7 +208,7 @@ class UserRepositoryImpl(
     override fun getUserReviewsCount(userId: String, result: (UiState<Int>) -> Unit) {
         db.collection(Constants.REVIEWS_COLLECTION)
             .whereEqualTo("userId", userId).get()
-            .addOnSuccessListener {  querySnapshot ->
+            .addOnSuccessListener { querySnapshot ->
                 val serviceCount = querySnapshot.size()
                 result.invoke(
                     UiState.Success(
@@ -223,8 +225,113 @@ class UserRepositoryImpl(
             }
     }
 
+    override fun isServiceFavourite(
+        userId: String,
+        serviceId: String,
+        result: (UiState<Boolean>) -> Unit
+    ) {
+        db.collection(Constants.USER_COLLECTION)
+            .document(userId)
+            .get()
+            .addOnSuccessListener {
+                val user = it.toObject(User::class.java)
+                if (user != null) {
+                    result.invoke(
+                        UiState.Success(
+                            user.favourites.contains(serviceId)
+                        )
+                    )
+                }
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Error(
+                        it.localizedMessage ?: "Oops, something went wrong"
+                    )
+                )
+            }
+    }
 
-    override fun updateUserData(userId: String, updates: HashMap<String, Any>, result: (UiState<String>) -> Unit) {
+    override fun favouritesChange(
+        userId: String,
+        serviceId: String,
+        changes: Boolean,
+        result: (UiState<String>) -> Unit
+    ) {
+        getUserData(
+            userId
+        ) { uiState ->
+            when(uiState) {
+                is UiState.Success -> {
+                    val user = uiState.data
+                    val list = user.favourites.toMutableList()
+                    if(changes) {
+                        list.add(serviceId)
+                    } else {
+                        list.remove(serviceId)
+                    }
+                    db.collection(Constants.USER_COLLECTION).document(userId)
+                        .update("favourites", list)
+                        .addOnSuccessListener {
+                            result.invoke(
+                                UiState.Success(
+                                    "State changed"
+                                )
+                            )
+                        }
+                        .addOnFailureListener {
+                            result.invoke(
+                                UiState.Error(
+                                    it.localizedMessage ?: "Oops, something went wrong"
+                                )
+                            )
+                        }
+                }
+                else -> {
+                    result.invoke(
+                        UiState.Error(
+                            "Failed to get user data"
+                        )
+                    )
+                }
+            }
+        }
+    }
+
+    override suspend fun getReviewsAuthors(
+        authorsIds: List<String>,
+        result: (UiState<List<User>>) -> Unit
+    ) {
+        val users = mutableListOf<User>()
+        for (authorId in authorsIds) {
+            val document = db.collection(Constants.USER_COLLECTION).document(authorId).get().await()
+            if (document.exists()) {
+                val user = document.toObject(User::class.java)
+                if (user != null) {
+                    users.add(user)
+                }
+            }
+        }
+        if (users.size == authorsIds.size) {
+            result.invoke(
+                UiState.Success(
+                    users
+                )
+            )
+        } else {
+            result.invoke(
+                UiState.Error(
+                    "Failed to get authors"
+                )
+            )
+        }
+    }
+
+    override fun updateUserData(
+        userId: String,
+        updates: HashMap<String, Any>,
+        result: (UiState<String>) -> Unit
+    ) {
         db.collection(Constants.USER_COLLECTION).document(userId).update(updates)
             .addOnSuccessListener {
                 result.invoke(

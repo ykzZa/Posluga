@@ -87,4 +87,9 @@
     <string name="no_reviews_text">We find 0 reviews =(</string>
     <string name="no_services_text">We find 0 services =(</string>
     <string name="no_projects_text">We find 0 project =(</string>
+    <string name="create_review_title">Write a review</string>
+    <string name="create_review_subtitle">Write everything in detail</string>
+    <string name="button_write_review_text">Write review</string>
+    <string name="rating_text">Rating</string>
+    <string name="no_saved_text">You don\'t have saved posts =(</string>
 </resources>

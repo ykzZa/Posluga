@@ -50,8 +50,7 @@ class MenuFragment : Fragment() {
         binding.apply {
             buttonProfile.setOnClickListener {
                 val action = MenuFragmentDirections.actionMenuFragmentToProfileFragment(
-                    firebaseAuth.uid ?: "",
-                    false
+                    firebaseAuth.uid ?: ""
                 )
                 findNavController().navigate(action)
             }

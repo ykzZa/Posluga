@@ -6,7 +6,8 @@ data class User(
     val phoneNumber: String,
     val instagram: String,
     val telegram: String,
-    val photoUrl: String
+    val photoUrl: String,
+    val favourites: List<String> = listOf()
 ){
     constructor(): this(
         "",

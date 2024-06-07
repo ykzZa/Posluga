@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import dev.ykzza.posluga.R
 import dev.ykzza.posluga.databinding.FragmentServiceBinding
@@ -32,7 +33,9 @@ class ServiceFragment : Fragment() {
     private lateinit var serviceViewModel: ServiceViewModel
     private lateinit var userViewModel: UserViewModel
 
-    private lateinit var userId: String
+    private lateinit var authorId: String
+    private val firebaseAuth: FirebaseAuth
+        get() = FirebaseAuth.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +51,15 @@ class ServiceFragment : Fragment() {
         serviceViewModel.getService(
             args.serviceId
         )
+        if(firebaseAuth.currentUser != null) {
+            binding.checkboxFavourite.showView()
+            userViewModel.checkServiceFavourite(
+                firebaseAuth.uid!!,
+                args.serviceId
+            )
+        } else {
+            binding.checkboxFavourite.hideView()
+        }
         observeViewModel()
         setOnClickListeners()
     }
@@ -58,11 +70,17 @@ class ServiceFragment : Fragment() {
                 findNavController().popBackStack()
             }
             userCard.setOnClickListener {
-                val action = ServiceFragmentDirections.actionServiceFragmentToProfileFragment2(
-                    userId,
-                    true
+                val action = ServiceFragmentDirections.actionServiceFragmentToProfileFragment(
+                    authorId
                 )
                 findNavController().navigate(action)
+            }
+            checkboxFavourite.setOnClickListener {
+                serviceViewModel.updateServiceState(
+                    firebaseAuth.uid!!,
+                    args.serviceId,
+                    checkboxFavourite.isChecked
+                )
             }
         }
     }
@@ -88,7 +106,6 @@ class ServiceFragment : Fragment() {
                         progressBar.hideView()
                         scrollView.showView()
                         if(uiState.data.images.isEmpty()) {
-                            buttonBack.setColorFilter(R.color.black)
                             viewPager.makeViewGone()
                         } else {
                             setupImageSlider(uiState.data.images)
@@ -115,7 +132,7 @@ class ServiceFragment : Fragment() {
                 }
                 is UiState.Success -> {
                     binding.apply {
-                        userId = uiState.data.id
+                        authorId = uiState.data.id
                         authorName.text = uiState.data.nickname
                         Glide.with(this@ServiceFragment)
                             .load(uiState.data.photoUrl)
@@ -123,6 +140,22 @@ class ServiceFragment : Fragment() {
                             .into(binding.authorProfileImage)
                         userCard.showView()
                     }
+                }
+            }
+        }
+        userViewModel.serviceFavourite.observe(viewLifecycleOwner) { uiState ->
+            when(uiState) {
+                is UiState.Success -> {
+                    binding.apply {
+                        checkboxFavourite.isChecked = uiState.data
+                    }
+                }
+                is UiState.Error -> {
+                    binding.apply {
+                        checkboxFavourite.hideView()
+                    }
+                }
+                is UiState.Loading -> {
                 }
             }
         }
