@@ -29,6 +29,11 @@ interface ServiceRepository {
         result: (UiState<List<Service>>) -> Unit
     )
 
+    suspend fun getServicesByIds(
+        idList: List<String>,
+        result: (UiState<List<Service>>) -> Unit
+    )
+
     suspend fun uploadImages(
         userId: String,
         imagesUrl: List<Uri>,

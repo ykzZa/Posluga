@@ -43,6 +43,23 @@ class UserViewModel @Inject constructor(
     val reviewsStats: LiveData<UiState<Int>>
         get() = _reviewsStats
 
+    private val _serviceFavourite = MutableLiveData<UiState<Boolean>>()
+    val serviceFavourite: LiveData<UiState<Boolean>>
+        get() = _serviceFavourite
+
+    fun checkServiceFavourite(
+        userId: String,
+        serviceId: String
+    ) {
+        _serviceFavourite.value = UiState.Loading
+        repository.isServiceFavourite(
+            userId,
+            serviceId
+        ) {
+            _serviceFavourite.value = it
+        }
+    }
+
     fun removeProfilePicture(userId: String) {
         _pictureDeleted.value = UiState.Loading
         repository.removeProfilePic(userId) {

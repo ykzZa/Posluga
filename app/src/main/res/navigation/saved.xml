@@ -9,5 +9,69 @@
         android:id="@+id/savedPostsFragment"
         android:name="dev.ykzza.posluga.ui.saved_posts.SavedPostsFragment"
         android:label="fragment_saved_posts"
-        tools:layout="@layout/fragment_saved_posts" />
+        tools:layout="@layout/fragment_saved_posts" >
+        <action
+            android:id="@+id/action_savedPostsFragment_to_serviceFragment"
+            app:destination="@id/serviceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/serviceFragment"
+        android:name="dev.ykzza.posluga.ui.home.services.ServiceFragment"
+        android:label="fragment_service"
+        tools:layout="@layout/fragment_service" >
+        <action
+            android:id="@+id/action_serviceFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <argument
+            android:name="serviceId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="dev.ykzza.posluga.ui.menu.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <argument
+            android:name="userId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_profileFragment_to_reviewsFragment"
+            app:destination="@id/reviewsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviewsFragment"
+        android:name="dev.ykzza.posluga.ui.home.reviews.ReviewsFragment"
+        android:label="fragment_reviews"
+        tools:layout="@layout/fragment_reviews" >
+        <argument
+            android:name="userId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_reviewsFragment_to_createReviewFragment"
+            app:destination="@id/createReviewFragment" />
+        <action
+            android:id="@+id/action_reviewsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createReviewFragment"
+        android:name="dev.ykzza.posluga.ui.home.reviews.CreateReviewFragment"
+        android:label="fragment_create_review"
+        tools:layout="@layout/fragment_create_review" >
+        <argument
+            android:name="userId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="dev.ykzza.posluga.ui.menu.profile.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" >
+        <argument
+            android:name="userId"
+            app:argType="string" />
+    </fragment>
 </navigation>

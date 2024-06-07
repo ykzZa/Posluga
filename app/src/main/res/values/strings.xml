@@ -84,4 +84,12 @@
     <string name="edit_text_max_price_hint">Max price</string>
     <string name="edit_text_min_price_hint">Min price</string>
     <string name="open_user_profile_text">Open user profile</string>
+    <string name="no_reviews_text">We find 0 reviews =(</string>
+    <string name="no_services_text">We find 0 services =(</string>
+    <string name="no_projects_text">We find 0 project =(</string>
+    <string name="create_review_title">Write a review</string>
+    <string name="create_review_subtitle">Write everything in detail</string>
+    <string name="button_write_review_text">Write review</string>
+    <string name="rating_text">Rating</string>
+    <string name="no_saved_text">You don\'t have saved posts =(</string>
 </resources>

@@ -58,9 +58,8 @@ class ProjectFragment : Fragment() {
                 findNavController().popBackStack()
             }
             userCard.setOnClickListener {
-                val action = ProjectFragmentDirections.actionProjectFragmentToProfileFragment2(
-                    userId,
-                    true
+                val action = ProjectFragmentDirections.actionProjectFragmentToProfileFragment(
+                    userId
                 )
                 findNavController().navigate(action)
             }
@@ -90,7 +89,6 @@ class ProjectFragment : Fragment() {
                         progressBar.hideView()
                         scrollView.showView()
                         if (uiState.data.images.isEmpty()) {
-                            buttonBack.setColorFilter(R.color.black)
                             viewPager.makeViewGone()
                         } else {
                             setupImageSlider(uiState.data.images)

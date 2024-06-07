@@ -11,6 +11,8 @@ import dev.ykzza.posluga.data.repository.AuthRepository
 import dev.ykzza.posluga.data.repository.AuthRepositoryImpl
 import dev.ykzza.posluga.data.repository.ProjectRepository
 import dev.ykzza.posluga.data.repository.ProjectRepositoryImpl
+import dev.ykzza.posluga.data.repository.ReviewRepository
+import dev.ykzza.posluga.data.repository.ReviewRepositoryImpl
 import dev.ykzza.posluga.data.repository.ServiceRepository
 import dev.ykzza.posluga.data.repository.ServiceRepositoryImpl
 import dev.ykzza.posluga.data.repository.UserRepository
@@ -55,5 +57,13 @@ object RepositoryModule {
         storage: StorageReference
     ): ProjectRepository {
         return ProjectRepositoryImpl(db, storage)
+    }
+
+    @Provides
+    @Singleton
+    fun provideReviewRepository(
+        db: FirebaseFirestore
+    ): ReviewRepository {
+        return ReviewRepositoryImpl(db)
     }
 }

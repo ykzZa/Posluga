@@ -142,25 +142,15 @@ class ServiceRepositoryImpl(
                     services.add(service)
                 }
                 if (searchQuery != null) {
-                    filterServices(
-                        services,
-                        searchQuery,
-                        descriptionSearch
-                    ) { uiState ->
-                        if (uiState is UiState.Success) {
-                            result.invoke(
-                                UiState.Success(
-                                    uiState.data
-                                )
+                    result.invoke(
+                        UiState.Success(
+                            filterServices(
+                                services,
+                                searchQuery,
+                                descriptionSearch
                             )
-                        } else {
-                            result.invoke(
-                                UiState.Error(
-                                    "Oops, something went wrong"
-                                )
-                            )
-                        }
-                    }
+                        )
+                    )
                 } else {
                     result.invoke(
                         UiState.Success(
@@ -178,12 +168,41 @@ class ServiceRepositoryImpl(
             }
     }
 
+    override suspend fun getServicesByIds(
+        idList: List<String>,
+        result: (UiState<List<Service>>) -> Unit
+    ) {
+        val services = mutableListOf<Service>()
+        for (serviceId in idList) {
+            val document =
+                db.collection(Constants.SERVICE_COLLECTION).document(serviceId).get().await()
+            if (document.exists()) {
+                val service = document.toObject(Service::class.java)
+                if (service != null) {
+                    services.add(service)
+                }
+            }
+        }
+        if (services.size == idList.size) {
+            result.invoke(
+                UiState.Success(
+                    services
+                )
+            )
+        } else {
+            result.invoke(
+                UiState.Error(
+                    "Failed to get services"
+                )
+            )
+        }
+    }
+
     private fun filterServices(
         services: List<Service>,
         searchQuery: String,
-        descriptionSearch: Boolean,
-        result: (UiState<List<Service>>) -> Unit
-    ) {
+        descriptionSearch: Boolean
+    ): List<Service> {
         val lowerCaseQuery = searchQuery.lowercase()
         val searchResults = services.mapNotNull { service ->
             val titleMatchScore =
@@ -200,11 +219,7 @@ class ServiceRepositoryImpl(
                 null
             }
         }
-        result.invoke(
-            UiState.Success(
-                searchResults.map { it.item }
-            )
-        )
+        return searchResults.map { it.item }
     }
 
     override suspend fun uploadImages(

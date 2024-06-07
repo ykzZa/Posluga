@@ -58,14 +58,6 @@ class BrowseProjectsFragment : Fragment(),
     private fun observeViewModel() {
         viewModel.projectsLoaded.observe(viewLifecycleOwner) { uiState ->
             when (uiState) {
-                is UiState.Error -> {
-                    showUi()
-                    binding.apply {
-                        errorImageView.showView()
-                        errorTextView.showView()
-                    }
-                }
-
                 is UiState.Loading -> {
                     hideUi()
                     binding.apply {
@@ -77,8 +69,23 @@ class BrowseProjectsFragment : Fragment(),
                     binding.apply {
                         progressBar.hideView()
                     }
+                    if (uiState.data.isEmpty()) {
+                        binding.apply {
+                            noDataTextView.showView()
+                            noDataImageView.showView()
+                        }
+                    }
                     recyclerViewAdapter.submitList(uiState.data)
                     showUi()
+                }
+
+                else -> {
+                    showUi()
+                    binding.apply {
+                        recyclerViewProjects.hideView()
+                        errorImageView.showView()
+                        errorTextView.showView()
+                    }
                 }
             }
         }
@@ -90,6 +97,8 @@ class BrowseProjectsFragment : Fragment(),
             floatingButtonSearch.hideView()
             errorImageView.hideView()
             errorTextView.hideView()
+            noDataImageView.hideView()
+            noDataTextView.hideView()
         }
     }
 
