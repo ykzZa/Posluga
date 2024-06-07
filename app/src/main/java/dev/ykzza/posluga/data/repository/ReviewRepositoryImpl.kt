@@ -38,11 +38,7 @@ class ReviewRepositoryImpl(
             .whereEqualTo("userId", userId)
             .get()
             .addOnSuccessListener { querySnapshot ->
-                val reviews = mutableListOf<Review>()
-                for (document in querySnapshot) {
-                    val review = document.toObject(Review::class.java)
-                    reviews.add(review)
-                }
+                val reviews = querySnapshot.toObjects(Review::class.java)
                 result.invoke(
                     UiState.Success(
                         reviews

@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_profileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_userServicesFragment"
+            app:destination="@id/userServicesFragment" />
     </fragment>
     <fragment
         android:id="@+id/reviewsFragment"
@@ -73,5 +76,17 @@
         <argument
             android:name="userId"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/userServicesFragment"
+        android:name="dev.ykzza.posluga.ui.menu.my_services.UserServicesFragment"
+        android:label="fragment_user_services"
+        tools:layout="@layout/fragment_user_services" >
+        <argument
+            android:name="userId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_userServicesFragment_to_serviceFragment"
+            app:destination="@id/serviceFragment" />
     </fragment>
 </navigation>

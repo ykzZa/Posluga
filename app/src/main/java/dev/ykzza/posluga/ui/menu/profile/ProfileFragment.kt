@@ -78,6 +78,12 @@ class ProfileFragment : Fragment() {
                 )
                 findNavController().navigate(action)
             }
+            textViewServicesCount.setOnClickListener {
+                val action = ProfileFragmentDirections.actionProfileFragmentToUserServicesFragment(
+                    args.userId
+                )
+                findNavController().navigate(action)
+            }
         }
     }
 

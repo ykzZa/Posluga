@@ -92,4 +92,6 @@
     <string name="button_write_review_text">Write review</string>
     <string name="rating_text">Rating</string>
     <string name="no_saved_text">You don\'t have saved posts =(</string>
+    <string name="menu_edit_text">Edit</string>
+    <string name="menu_delete_text">Delete</string>
 </resources>
