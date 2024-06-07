@@ -18,8 +18,7 @@ import dev.ykzza.posluga.util.showView
 @AndroidEntryPoint
 class BrowseServicesFragment : Fragment(),
     ServicesAdapter.OnItemClickListener,
-    SearchSettingsDialogFragment.SearchDialogListener
-{
+    SearchSettingsDialogFragment.SearchDialogListener {
 
     private var _binding: FragmentBrowseServicesBinding? = null
     private val binding: FragmentBrowseServicesBinding
@@ -65,16 +64,25 @@ class BrowseServicesFragment : Fragment(),
                         progressBar.showView()
                     }
                 }
+
                 is UiState.Success -> {
                     binding.apply {
                         progressBar.hideView()
                     }
+                    if (uiState.data.isEmpty()) {
+                        binding.apply {
+                            noDataTextView.showView()
+                            noDataImageView.showView()
+                        }
+                    }
                     recyclerViewAdapter.submitList(uiState.data)
                     showUi()
                 }
-                is UiState.Error -> {
+
+                else -> {
                     showUi()
                     binding.apply {
+                        recyclerViewServices.hideView()
                         errorImageView.showView()
                         errorTextView.showView()
                     }
@@ -89,6 +97,8 @@ class BrowseServicesFragment : Fragment(),
             floatingButtonSearch.hideView()
             errorImageView.hideView()
             errorTextView.hideView()
+            noDataImageView.hideView()
+            noDataTextView.hideView()
         }
     }
 

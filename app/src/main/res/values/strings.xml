@@ -84,4 +84,7 @@
     <string name="edit_text_max_price_hint">Max price</string>
     <string name="edit_text_min_price_hint">Min price</string>
     <string name="open_user_profile_text">Open user profile</string>
+    <string name="no_reviews_text">We find 0 reviews =(</string>
+    <string name="no_services_text">We find 0 services =(</string>
+    <string name="no_projects_text">We find 0 project =(</string>
 </resources>
