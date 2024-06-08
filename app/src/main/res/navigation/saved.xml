@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_profileFragment_to_userServicesFragment"
             app:destination="@id/userServicesFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_userProjectsFragment"
+            app:destination="@id/userProjectsFragment" />
     </fragment>
     <fragment
         android:id="@+id/reviewsFragment"
@@ -88,5 +91,27 @@
         <action
             android:id="@+id/action_userServicesFragment_to_serviceFragment"
             app:destination="@id/serviceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userProjectsFragment"
+        android:name="dev.ykzza.posluga.ui.menu.my_projects.UserProjectsFragment"
+        android:label="fragment_user_projects"
+        tools:layout="@layout/fragment_user_projects" >
+        <argument android:name="userId" />
+        <action
+            android:id="@+id/action_userProjectsFragment_to_projectFragment"
+            app:destination="@id/projectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/projectFragment"
+        android:name="dev.ykzza.posluga.ui.home.projects.ProjectFragment"
+        android:label="fragment_project"
+        tools:layout="@layout/fragment_project" >
+        <argument
+            android:name="projectId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_projectFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 </navigation>

@@ -84,6 +84,12 @@ class ProfileFragment : Fragment() {
                 )
                 findNavController().navigate(action)
             }
+            textViewProjectsCount.setOnClickListener {
+                val action = ProfileFragmentDirections.actionProfileFragmentToUserProjectsFragment(
+                    args.userId
+                )
+                findNavController().navigate(action)
+            }
         }
     }
 

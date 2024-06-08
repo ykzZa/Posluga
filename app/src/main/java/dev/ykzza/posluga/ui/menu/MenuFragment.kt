@@ -61,7 +61,10 @@ class MenuFragment : Fragment() {
                 findNavController().navigate(action)
             }
             buttonCreatedProjects.setOnClickListener {
-
+                val action = MenuFragmentDirections.actionMenuFragmentToUserProjectsFragment(
+                    firebaseAuth.uid ?: ""
+                )
+                findNavController().navigate(action)
             }
             buttonSettings.setOnClickListener {
                 findNavController().navigate(R.id.action_menuFragment_to_settingsFragment)
