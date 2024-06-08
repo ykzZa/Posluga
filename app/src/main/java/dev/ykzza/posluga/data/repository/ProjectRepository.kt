@@ -17,6 +17,16 @@ interface ProjectRepository {
         result: (UiState<Project>) -> Unit
     )
 
+    fun getUserProjects(
+        userId: String,
+        result: (UiState<List<Project>>) -> Unit
+    )
+
+    fun deleteProject(
+        projectId: String,
+        result: (UiState<String>) -> Unit
+    )
+
     fun getProjects(
         searchQuery: String?,
         descriptionSearch: Boolean,

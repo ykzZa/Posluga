@@ -168,6 +168,46 @@ class ServiceRepositoryImpl(
             }
     }
 
+    override fun getUserServices(userId: String, result: (UiState<List<Service>>) -> Unit) {
+        db.collection(Constants.SERVICE_COLLECTION)
+            .whereEqualTo("authorId", userId)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                val services = querySnapshot.toObjects(Service::class.java)
+                result.invoke(
+                    UiState.Success(
+                        services
+                    )
+                )
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Error(
+                        it.localizedMessage ?: "Oops, something went wrong"
+                    )
+                )
+            }
+    }
+
+    override fun deleteService(serviceId: String, result: (UiState<String>) -> Unit) {
+        db.collection(Constants.SERVICE_COLLECTION).document(serviceId)
+            .delete()
+            .addOnSuccessListener {
+                result.invoke(
+                    UiState.Success(
+                        "Service has been deleted"
+                    )
+                )
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Error(
+                        "Failed to delete service"
+                    )
+                )
+            }
+    }
+
     override suspend fun getServicesByIds(
         idList: List<String>,
         result: (UiState<List<Service>>) -> Unit
@@ -183,19 +223,11 @@ class ServiceRepositoryImpl(
                 }
             }
         }
-        if (services.size == idList.size) {
-            result.invoke(
-                UiState.Success(
-                    services
-                )
+        result.invoke(
+            UiState.Success(
+                services
             )
-        } else {
-            result.invoke(
-                UiState.Error(
-                    "Failed to get services"
-                )
-            )
-        }
+        )
     }
 
     private fun filterServices(

@@ -68,6 +68,46 @@ class ProjectRepositoryImpl(
             }
     }
 
+    override fun getUserProjects(userId: String, result: (UiState<List<Project>>) -> Unit) {
+        db.collection(Constants.PROJECT_COLLECTION)
+            .whereEqualTo("authorId", userId)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                val project = querySnapshot.toObjects(Project::class.java)
+                result.invoke(
+                    UiState.Success(
+                        project
+                    )
+                )
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Error(
+                        it.localizedMessage ?: "Oops, something went wrong"
+                    )
+                )
+            }
+    }
+
+    override fun deleteProject(projectId: String, result: (UiState<String>) -> Unit) {
+        db.collection(Constants.PROJECT_COLLECTION).document(projectId)
+            .delete()
+            .addOnSuccessListener {
+                result.invoke(
+                    UiState.Success(
+                        "Project has been deleted"
+                    )
+                )
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Error(
+                        "Failed to delete project"
+                    )
+                )
+            }
+    }
+
     override fun getProjects(
         searchQuery: String?,
         descriptionSearch: Boolean,

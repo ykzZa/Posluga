@@ -29,6 +29,16 @@ interface ServiceRepository {
         result: (UiState<List<Service>>) -> Unit
     )
 
+    fun getUserServices(
+        userId: String,
+        result: (UiState<List<Service>>) -> Unit
+    )
+
+    fun deleteService(
+        serviceId: String,
+        result: (UiState<String>) -> Unit
+    )
+
     suspend fun getServicesByIds(
         idList: List<String>,
         result: (UiState<List<Service>>) -> Unit
