@@ -9,6 +9,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.ykzza.posluga.data.repository.AuthRepository
 import dev.ykzza.posluga.data.repository.AuthRepositoryImpl
+import dev.ykzza.posluga.data.repository.ChatRepository
+import dev.ykzza.posluga.data.repository.ChatRepositoryImpl
 import dev.ykzza.posluga.data.repository.ProjectRepository
 import dev.ykzza.posluga.data.repository.ProjectRepositoryImpl
 import dev.ykzza.posluga.data.repository.ReviewRepository
@@ -65,5 +67,13 @@ object RepositoryModule {
         db: FirebaseFirestore
     ): ReviewRepository {
         return ReviewRepositoryImpl(db)
+    }
+
+    @Provides
+    @Singleton
+    fun provideChatRepository(
+        db: FirebaseFirestore
+    ): ChatRepository {
+        return ChatRepositoryImpl(db)
     }
 }

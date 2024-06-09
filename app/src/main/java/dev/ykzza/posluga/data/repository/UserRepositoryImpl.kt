@@ -298,13 +298,13 @@ class UserRepositoryImpl(
         }
     }
 
-    override suspend fun getReviewsAuthors(
-        authorsIds: List<String>,
-        result: (UiState<List<User>>) -> Unit
+    override suspend fun getUsersListByIds(
+        usersId: List<String>,
+        result: (List<User>) -> Unit
     ) {
         val users = mutableListOf<User>()
-        for (authorId in authorsIds) {
-            val document = db.collection(Constants.USER_COLLECTION).document(authorId).get().await()
+        for (userId in usersId) {
+            val document = db.collection(Constants.USER_COLLECTION).document(userId).get().await()
             if (document.exists()) {
                 val user = document.toObject(User::class.java)
                 if (user != null) {
@@ -312,17 +312,13 @@ class UserRepositoryImpl(
                 }
             }
         }
-        if (users.size == authorsIds.size) {
+        if (users.size == usersId.size) {
             result.invoke(
-                UiState.Success(
-                    users
-                )
+                users
             )
         } else {
             result.invoke(
-                UiState.Error(
-                    "Failed to get authors"
-                )
+                emptyList()
             )
         }
     }

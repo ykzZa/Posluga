@@ -1,21 +1,43 @@
 package dev.ykzza.posluga.ui.create_post.create_service
 
+import android.app.Application
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.ykzza.posluga.R
 import dev.ykzza.posluga.data.entities.Service
 import dev.ykzza.posluga.data.repository.ServiceRepository
 import dev.ykzza.posluga.util.UiState
+import dev.ykzza.posluga.util.getStringArrayEnglish
+import dev.ykzza.posluga.util.isEnglish
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class ServiceViewModel @Inject constructor(
-    private val repository: ServiceRepository
+    private val repository: ServiceRepository,
+    private val application: Application
 ) : ViewModel() {
+
+    @Inject
+    @Named("categories")
+    lateinit var categories: Array<String>
+
+    @Inject
+    @Named("subCategories")
+    lateinit var subCategories: Array<Int>
+
+    @Inject
+    @Named("states")
+    lateinit var states: Array<String>
+
+    @Inject
+    @Named("cities")
+    lateinit var cities: Array<Int>
 
     private val _category = MutableLiveData<String>()
     private val _subCategory = MutableLiveData<String>()
@@ -138,23 +160,61 @@ class ServiceViewModel @Inject constructor(
         listImages: List<String>
     ) {
         if (validateData(title, description)) {
-            val service = Service(
-                serviceId ?: "",
-                title,
-                description,
-                _category.value!!,
-                _subCategory.value!!,
-                authorId,
-                date,
-                price.toIntOrNull() ?: 0,
-                _state.value!!,
-                _city.value!!
-            )
-            repository.postService(
-                service,
-                listImages
-            ) { uiState ->
-                _servicePosted.value = uiState
+            if (isEnglish(_category.value!!)) {
+                val service = Service(
+                    serviceId ?: "",
+                    title,
+                    description,
+                    _category.value!!,
+                    _subCategory.value!!,
+                    authorId,
+                    date,
+                    price.toIntOrNull() ?: 0,
+                    _state.value!!,
+                    _city.value!!
+                )
+                repository.postService(
+                    service,
+                    listImages
+                ) { uiState ->
+                    _servicePosted.value = uiState
+                }
+            } else {
+                val categoryIndex =
+                    categories.indexOf(_category.value)
+                val category = getStringArrayEnglish(application, R.array.categories)[categoryIndex]
+                val subCategoryArray = subCategories[categoryIndex]
+                val subCategoryIndex =
+                    application.resources.getStringArray(subCategoryArray)
+                        .indexOf(_subCategory.value)
+                val subCategory =
+                    getStringArrayEnglish(application, subCategoryArray)[subCategoryIndex]
+                val stateIndex =
+                    states.indexOf(_state.value)
+                val state = getStringArrayEnglish(application, R.array.states)[stateIndex]
+                val citiesArray = cities[stateIndex]
+                val cityIndex =
+                    application.resources.getStringArray(citiesArray)
+                        .indexOf(_city.value)
+                val city = getStringArrayEnglish(application, citiesArray)[cityIndex]
+                val service = Service(
+                    serviceId ?: "",
+                    title,
+                    description,
+                    category,
+                    subCategory,
+                    authorId,
+                    date,
+                    price.toIntOrNull() ?: 0,
+                    state,
+                    city
+                )
+                repository.postService(
+                    service,
+                    listImages
+                ) { uiState ->
+                    _servicePosted.value = uiState
+                }
             }
         }
     }

@@ -1,0 +1,109 @@
+<resources>
+    <string name="app_name">Posluga</string>
+    <string name="web_client_id">262905056118-44611m6tji9ncqa5g4guaqh1lo5jf4r1.apps.googleusercontent.com</string>
+
+    <!-- Login Fragment Special -->
+    <string name="login_welcome_title_text">З поверненням до Posluga!</string>
+    <string name="login_enter_credentials_text">Введіть пошту та пароль, зазначені при реєстрації</string>
+    <string name="login_password_recovery_text">Забули пароль?</string>
+    <string name="login_sign_up_text">Немає акаунту? Зареєструватися</string>
+
+    <!-- Password Recovery Fragment Special -->
+    <string name="password_recovery_title">Відновити пароль від Posluga</string>
+    <string name="password_recovery_subtitle">Будь ласка, введіть пошту</string>
+
+    <!-- Register Fragment Special -->
+    <string name="register_title_text">Зареєструйтесь в Posluga!</string>
+    <string name="register_second_title_text">Будь ласка, введіть свої дані</string>
+
+    <!-- Edit Profile Fragment Special -->
+    <string name="edit_text_phone_hint_text">Напишіть мобільний номер: 012 345 6789</string>
+    <string name="edit_text_instagram_hint_text">Напишіть instagram тег</string>
+    <string name="edit_text_telegram_hint_text">Напишіть telegram тег</string>
+    <string name="button_remove_photo_text">Видалити фото</string>
+
+    <!-- Service and Project Fragment Special -->
+    <string name="button_create_project_text">Створити проєкт</string>
+    <string name="button_create_service_text">Створити послугу</string>
+    <string name="create_service_title_text">Створити послугу</string>
+    <string name="service_title_text">Заголовок послуги</string>
+    <string name="create_service_subtitle_text">Опишіть все детально</string>
+    <string name="edit_text_service_title_hint">Напишіть заголовок, наприклад: Репетитор з математики</string>
+    <string name="description_text">Опис</string>
+    <string name="edit_text_service_description_hint">Напишіть опис, наприклад: Маю досвід роботи як з дітьми, так і з дорослими</string>
+    <string name="images_text">Фотографії</string>
+    <string name="category_text">Категорія</string>
+    <string name="drop_down_menu_category_text">Оберіть категорію</string>
+    <string name="subcategory_text">Підкатегорія</string>
+    <string name="drop_down_menu_subcategory_text">Оберіть підкатегорію</string>
+    <string name="state_text">Область</string>
+    <string name="drop_down_menu_state_text">Оберість область</string>
+    <string name="city_text">Місто</string>
+    <string name="drop_down_menu_city_text">Оберіть місто</string>
+    <string name="edit_text_service_price_hint">Напишіть ціну</string>
+    <string name="price_text">Ціна</string>
+    <string name="create_project_title_text">Створити проєкт</string>
+    <string name="create_project_subtitle_text">Опишіть все детально</string>
+    <string name="project_title_text">Заголовок проєкту</string>
+    <string name="edit_text_project_title_hint">Напишіть заголовок, наприклад: Потрібен ремонт iPhone 11</string>
+    <string name="edit_text_project_description_hint">Напишіть опис, наприклда: FaceID не працює</string>
+
+
+    <!-- General -->
+    <string name="email_text">Пошта</string>
+    <string name="password_text">Пароль</string>
+    <string name="name_text">Ім\'я</string>
+    <string name="sign_in_text">Увійти</string>
+    <string name="sign_up_text">Зареєструватися</string>
+    <string name="or_text">або</string>
+    <string name="recover_text">Відновити</string>
+    <string name="phone_number_text">Номер телефону</string>
+    <string name="telegram_text">Telegram</string>
+    <string name="instagram_text">Instagram</string>
+    <string name="update_profile_text">Оновити профіль</string>
+    <string name="profile_text">Профіль</string>
+    <string name="menu_text">Меню</string>
+    <string name="my_services_text">Мої послуги</string>
+    <string name="my_projects_text">Мої проєкти</string>
+    <string name="settings_text">Налаштування</string>
+    <string name="logout_text">Вийти</string>
+    <string name="about_text">Про додаток</string>
+    <string name="email_edit_text_hint">Напишить свою пошту</string>
+    <string name="password_edit_text_hint">Напишіть свій пароль</string>
+    <string name="name_edit_text_hint">Напишіть своє ім\'я</string>
+    <string name="phone_text">Мобільний телефон</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="checkbox_search_description">Пошук в описі</string>
+    <string name="edit_text_max_price_hint">Макс. ціна</string>
+    <string name="edit_text_min_price_hint">Мін. ціна</string>
+    <string name="open_user_profile_text">Відкрити профіль</string>
+    <string name="no_reviews_text">Ми знайшли 0 відгуків =(</string>
+    <string name="no_services_text">Ми знайшли 0 послуг =(</string>
+    <string name="no_projects_text">Ми знайшли 0 проєктів =(</string>
+    <string name="create_review_title">Написати відгук</string>
+    <string name="create_review_subtitle">Опишіть все детально</string>
+    <string name="button_write_review_text">Написати відгук</string>
+    <string name="rating_text">Рейтинг</string>
+    <string name="no_saved_text">У вас немає збережених постів =(</string>
+    <string name="menu_edit_text">Редагувати</string>
+    <string name="menu_delete_text">Видалити</string>
+    <string name="edit_service_title_text">Редагувати послугу</string>
+    <string name="edit_service_subtitle_text">Опишіть все детально</string>
+    <string name="button_edit_service_text">Оновити послугу</string>
+    <string name="button_edit_project_text">Оновити проєкт</string>
+    <string name="edit_project_title_text">Редагувати проєкт</string>
+    <string name="no_chats_text">Ми знайшли 0 чатів =(</string>
+    <string name="no_messages_text">Немає повідомлень</string>
+    <string name="edit_text_message_text">Надрукуйте щось…</string>
+    <string name="button_open_chat_text">Відкрити чат</string>
+    <string name="menu_tex">Меню</string>
+    <string name="chats_text">Чати</string>
+    <string name="create_text">Створити</string>
+    <string name="saved_text">Збережені</string>
+    <string name="home_text">Головна</string>
+    <string name="services_text">Послуги</string>
+    <string name="projects_text">Проєкти</string>
+</resources>

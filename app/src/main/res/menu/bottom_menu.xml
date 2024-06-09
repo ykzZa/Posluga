@@ -6,29 +6,29 @@
         android:id="@+id/home"
         android:enabled="true"
         android:icon="@drawable/ic_main_page"
-        android:title="Home" />
+        android:title="@string/home_text" />
 
     <item
         android:id="@+id/saved"
         android:enabled="true"
         android:icon="@drawable/ic_bookmark"
-        android:title="Saved" />
+        android:title="@string/saved_text"/>
 
     <item
         android:id="@+id/create"
         android:enabled="true"
         android:icon="@drawable/ic_add"
-        android:title="Create" />
+        android:title="@string/create_text" />
 
     <item
         android:id="@+id/chats"
         android:enabled="true"
         android:icon="@drawable/ic_chat"
-        android:title="Chats" />
+        android:title="@string/chats_text" />
 
     <item
         android:id="@+id/menu"
         android:enabled="true"
         android:icon="@drawable/ic_menu"
-        android:title="Menu" />
+        android:title="@string/menu_text" />
 </menu>

@@ -12,7 +12,7 @@ interface ReviewRepository {
 
     fun getUserReviews(
         userId: String,
-        result: (UiState<List<Review>>) -> Unit
+        result: (List<Review>) -> Unit
     )
 
 }

@@ -10,6 +10,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import dev.ykzza.posluga.R
 import dev.ykzza.posluga.databinding.BottomSheetBinding
+import dev.ykzza.posluga.util.getStringArrayEnglish
 import dev.ykzza.posluga.util.showToast
 import javax.inject.Inject
 import javax.inject.Named
@@ -76,22 +77,72 @@ class SearchSettingsDialogFragment(
                         editTextMaxPrice.text.toString().toIntOrNull(),
                     )
                 ) {
-                    val searchQuery = if (searchView.query.toString().isBlank()) {
+                    val searchQuery = searchView.query.toString().ifBlank {
                         null
-                    } else {
-                        searchView.query.toString()
                     }
-                    listener.onSearchClick(
-                        searchQuery,
-                        checkboxAdvancedSearch.isActivated,
-                        viewModel.category.value,
-                        viewModel.subCategory.value,
-                        viewModel.state.value,
-                        viewModel.city.value,
-                        editTextMinPrice.text.toString().toIntOrNull(),
-                        editTextMaxPrice.text.toString().toIntOrNull()
-                    )
-                    dismiss()
+                    if (viewModel.category.value != null || viewModel.state.value != null) {
+                        val categoryIndex =
+                            categories.indexOf(viewModel.category.value)
+                        val category = if (viewModel.category.value == null) {
+                            null
+                        } else {
+                            getStringArrayEnglish(
+                                requireContext(),
+                                R.array.categories
+                            )[categoryIndex]
+                        }
+                        val subCategory = if (viewModel.subCategory.value == null) {
+                            null
+                        } else {
+                            val subCategoryArray = subCategories[categoryIndex]
+                            val subCategoryIndex =
+                                resources.getStringArray(subCategoryArray)
+                                    .indexOf(viewModel.subCategory.value)
+                            getStringArrayEnglish(
+                                requireContext(),
+                                subCategoryArray
+                            )[subCategoryIndex]
+                        }
+                        val stateIndex =
+                            states.indexOf(viewModel.state.value)
+                        val state = if (viewModel.state.value == null) {
+                            null
+                        } else {
+                            getStringArrayEnglish(requireContext(), R.array.states)[stateIndex]
+                        }
+                        val city = if (viewModel.city.value == null) {
+                            null
+                        } else {
+                            val citiesArray = cities[stateIndex]
+                            val cityIndex =
+                                resources.getStringArray(citiesArray)
+                                    .indexOf(viewModel.city.value)
+                            getStringArrayEnglish(requireContext(), citiesArray)[cityIndex]
+                        }
+                        listener.onSearchClick(
+                            searchQuery,
+                            checkboxAdvancedSearch.isActivated,
+                            category,
+                            subCategory,
+                            state,
+                            city,
+                            editTextMinPrice.text.toString().toIntOrNull(),
+                            editTextMaxPrice.text.toString().toIntOrNull()
+                        )
+                        dismiss()
+                    } else {
+                        listener.onSearchClick(
+                            searchQuery,
+                            checkboxAdvancedSearch.isActivated,
+                            viewModel.category.value,
+                            viewModel.subCategory.value,
+                            viewModel.state.value,
+                            viewModel.city.value,
+                            editTextMinPrice.text.toString().toIntOrNull(),
+                            editTextMaxPrice.text.toString().toIntOrNull()
+                        )
+                        dismiss()
+                    }
                 } else {
                     showToast("Max price must be higher the min price")
                 }

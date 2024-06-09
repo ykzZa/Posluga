@@ -69,8 +69,8 @@ interface UserRepository {
         result: (UiState<String>) -> Unit
     )
 
-    suspend fun getReviewsAuthors(
-        authorsIds: List<String>,
-        result: (UiState<List<User>>) -> Unit
+    suspend fun getUsersListByIds(
+        usersId: List<String>,
+        result: (List<User>) -> Unit
     )
 }

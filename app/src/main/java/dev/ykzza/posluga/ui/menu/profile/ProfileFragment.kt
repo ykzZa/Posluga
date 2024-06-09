@@ -43,7 +43,7 @@ class ProfileFragment : Fragment() {
         viewModel = ViewModelProvider(this)[UserViewModel::class.java]
         setOnClickListeners()
         hideUi()
-        hideEdit()
+        setupUi()
         observeViewModel()
         viewModel.getStatistic(
             args.userId
@@ -53,10 +53,12 @@ class ProfileFragment : Fragment() {
         )
     }
 
-    private fun hideEdit() {
+    private fun setupUi() {
         if(args.userId != firebaseAuth.uid) {
+            binding.buttonChat.showView()
             binding.buttonEdit.hideView()
         } else {
+            binding.buttonChat.hideView()
             binding.buttonEdit.showView()
         }
     }
@@ -87,6 +89,12 @@ class ProfileFragment : Fragment() {
             textViewProjectsCount.setOnClickListener {
                 val action = ProfileFragmentDirections.actionProfileFragmentToUserProjectsFragment(
                     args.userId
+                )
+                findNavController().navigate(action)
+            }
+            buttonChat.setOnClickListener {
+                val action = ProfileFragmentDirections.actionProfileFragmentToOpenedChatFragment(
+                    null, args.userId
                 )
                 findNavController().navigate(action)
             }
@@ -194,6 +202,7 @@ class ProfileFragment : Fragment() {
             imageViewInstagram.hideView()
             textViewInstagramInfo.hideView()
             textViewPhoneInfo.hideView()
+            buttonChat.hideView()
             textViewTelegramInfo.hideView()
         }
     }

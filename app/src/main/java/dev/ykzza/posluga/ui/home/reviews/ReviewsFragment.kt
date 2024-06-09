@@ -74,59 +74,16 @@ class ReviewsFragment : Fragment(), ReviewsAdapter.OnItemClickListener {
     }
 
     private fun observeViewModel() {
-        viewModel.userReviews.observe(viewLifecycleOwner) { uiState ->
-            when(uiState) {
-                is UiState.Loading -> {
-                    hideUi()
-                    binding.progressBar.showView()
+        viewModel.reviewAuthorsPairs.observe(viewLifecycleOwner) {
+            if(it.isEmpty()) {
+                hideUi()
+                binding.apply {
+                    noDataImageView.showView()
+                    noDataTextView.showView()
                 }
-                is UiState.Success -> {
-                    if(uiState.data.isEmpty()) {
-                        showUi()
-                        binding.apply {
-                            progressBar.hideView()
-                            noDataTextView.showView()
-                            noDataImageView.showView()
-                        }
-                    } else {
-                        reviews = uiState.data
-                        viewModel.getUsers(uiState.data.map {
-                            it.authorId
-                        })
-                    }
-                }
-                else -> {
-                    showUi()
-                    binding.apply {
-                        errorImageView.showView()
-                        errorTextView.showView()
-                    }
-                }
-            }
-        }
-        viewModel.authors.observe(viewLifecycleOwner) { uiState ->
-            when(uiState) {
-                is UiState.Success -> {
-                    showUi()
-                    binding.progressBar.hideView()
-                    if(uiState.data.isEmpty()) {
-                        binding.apply {
-                            errorImageView.showView()
-                            errorTextView.showView()
-                        }
-                    } else {
-                        authors = uiState.data
-                        val reviewUserPairs = reviews.zip(authors)
-                        recyclerViewAdapter.submitList(reviewUserPairs)
-                    }
-                }
-                else -> {
-                    showUi()
-                    binding.apply {
-                        errorImageView.showView()
-                        errorTextView.showView()
-                    }
-                }
+            } else {
+                showUi()
+                recyclerViewAdapter.submitList(it)
             }
         }
     }

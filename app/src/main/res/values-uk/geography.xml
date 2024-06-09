@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="states">
+        <item>Автономна Республіка Крим</item>
+        <item>Вінницька</item>
+        <item>Волинська</item>
+        <item>Дніпропетровська</item>
+        <item>Донецька</item>
+        <item>Житомирська</item>
+        <item>Закарпатська</item>
+        <item>Запорізька</item>
+        <item>Івано-Франківська</item>
+        <item>Київська</item>
+        <item>Кіровоградська</item>
+        <item>Луганська</item>
+        <item>Львівська</item>
+        <item>Миколаївська</item>
+        <item>Одеська</item>
+        <item>Полтавська</item>
+        <item>Рівненська</item>
+        <item>Сумська</item>
+        <item>Тернопільська</item>
+        <item>Харківська</item>
+        <item>Херсонська</item>
+        <item>Хмельницька</item>
+        <item>Черкаська</item>
+        <item>Чернівецька</item>
+        <item>Чернігівська</item>
+    </string-array>
+
+    <string-array name="avtonomna_respublika_krym_cities">
+        <item>Сімферополь</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="vinnytska_cities">
+        <item>Вінниця</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="volynska_cities">
+        <item>Луцьк</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="dnipropetrovska_cities">
+        <item>Дніпро</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="donetska_cities">
+        <item>Донецьк</item>
+        <item>Краматорськ</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="zhytomyrska_cities">
+        <item>Житомир</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="zakarpatska_cities">
+        <item>Ужгород</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="zaporizka_cities">
+        <item>Запоріжжя</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="ivano_frankivska_cities">
+        <item>Івано-Франківськ</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="kyivska_cities">
+        <item>Київ</item>
+        <item>Баришівка</item>
+        <item>Біла Церква</item>
+        <item>Богуслав</item>
+        <item>Бориспіль</item>
+        <item>Бородянка</item>
+        <item>Бровари</item>
+        <item>Васильків</item>
+        <item>Вишгород</item>
+        <item>Володарка</item>
+        <item>Згурівка</item>
+        <item>Іванків</item>
+        <item>Кагарлик</item>
+        <item>Макарів</item>
+        <item>Миронівка</item>
+        <item>Обухів</item>
+        <item>Переяслав-Хмельницький</item>
+        <item>Красятичі</item>
+        <item>Рокитне</item>
+        <item>Сквира</item>
+        <item>Ставищє</item>
+        <item>Тараща</item>
+        <item>Тетіїв</item>
+        <item>Фастів</item>
+        <item>Яготин</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="kirovohradska_cities">
+        <item>Кропивницький</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="luhanska_cities">
+        <item>Луганськ</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="lvivska_cities">
+        <item>Львів</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="mykolaivska_cities">
+        <item>Миколаїв</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="odeska_cities">
+        <item>Одеса</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="poltavska_cities">
+        <item>Полтава</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="rivnenska_cities">
+        <item>Рівне</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="sumska_cities">
+        <item>Суми</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="ternopilska_cities">
+        <item>Тернопіль</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="kharkivska_cities">
+        <item>Харків</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="khersonska_cities">
+        <item>Херсон</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="khmelnytska_cities">
+        <item>Хмельницький</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="cherkaska_cities">
+        <item>Черкаси</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="chernivetska_cities">
+        <item>Чернівці</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="chernihivska_cities">
+        <item>Чернігів</item>
+        <item>Бахмач</item>
+        <item>Бобровиця</item>
+        <item>Борзна</item>
+        <item>Варва</item>
+        <item>Городня</item>
+        <item>Ічня</item>
+        <item>Козелець</item>
+        <item>Короп</item>
+        <item>Корюківка</item>
+        <item>Куликівка</item>
+        <item>Мена</item>
+        <item>Ніжин</item>
+        <item>Новгород-Сіверський</item>
+        <item>Носівка</item>
+        <item>Прилуки</item>
+        <item>Ріпки</item>
+        <item>Семенівка</item>
+        <item>Сосниця</item>
+        <item>Срібне</item>
+        <item>Талалаївка</item>
+        <item>Щорс</item>
+        <item>Інше</item>
+    </string-array>
+</resources>

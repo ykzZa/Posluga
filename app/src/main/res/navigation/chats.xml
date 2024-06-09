@@ -8,5 +8,22 @@
         android:id="@+id/chatsFragment"
         android:name="dev.ykzza.posluga.ui.chats.ChatsFragment"
         android:label="fragment_chats"
-        tools:layout="@layout/fragment_chats" />
+        tools:layout="@layout/fragment_chats" >
+        <action
+            android:id="@+id/action_chatsFragment_to_openedChatFragment"
+            app:destination="@id/openedChatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/openedChatFragment"
+        android:name="dev.ykzza.posluga.ui.chats.OpenedChatFragment"
+        android:label="fragment_opened_chat"
+        tools:layout="@layout/fragment_opened_chat" >
+        <argument
+            android:name="chatId"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="userId"
+            app:argType="string"/>
+    </fragment>
 </navigation>
