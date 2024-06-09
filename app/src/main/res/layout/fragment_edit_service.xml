@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.create_post.create_service.CreateServiceFragment">
+    tools:context=".ui.create_post.create_service.EditServiceFragment">
 
     <ImageView
         android:id="@+id/button_back"
@@ -16,13 +16,23 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/black" />
 
+    <ProgressBar
+        android:visibility="invisible"
+        android:id="@+id/page_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/text_view_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/nunitosans_7pt_extra_bold"
-        android:text="@string/create_service_title_text"
+        android:text="@string/edit_service_title_text"
         android:textColor="@color/black"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/nunitosans_7pt_medium"
-        android:text="@string/create_service_subtitle_text"
+        android:text="@string/edit_service_subtitle_text"
         android:textAlignment="center"
         android:textColor="@color/grey"
         android:textSize="18sp"
@@ -49,7 +59,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@id/button_create_service"
+        app:layout_constraintBottom_toTopOf="@id/button_edit_service"
         app:layout_constraintTop_toBottomOf="@id/text_view_subtitle">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -166,7 +176,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/text_view_service_subcategory"
+                android:id="@+id/text_view_project_subcategory"
                 style="@style/textViewEditTextLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -185,7 +195,7 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_view_service_subcategory">
+                app:layout_constraintTop_toBottomOf="@id/text_view_project_subcategory">
 
                 <AutoCompleteTextView
                     android:id="@+id/auto_complete_text_subcategory"
@@ -289,14 +299,14 @@
     </ScrollView>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_create_service"
+        android:id="@+id/button_edit_service"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/black"
         android:fontFamily="@font/nunitosans_7pt_extra_bold"
-        android:text="@string/button_create_service_text"
+        android:text="@string/button_edit_service_text"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:cornerRadius="5dp"
@@ -311,8 +321,8 @@
         android:layout_height="0dp"
         android:layout_margin="8dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/button_create_service"
-        app:layout_constraintEnd_toEndOf="@id/button_create_service"
-        app:layout_constraintStart_toStartOf="@id/button_create_service"
-        app:layout_constraintTop_toTopOf="@id/button_create_service" />
+        app:layout_constraintBottom_toBottomOf="@id/button_edit_service"
+        app:layout_constraintEnd_toEndOf="@id/button_edit_service"
+        app:layout_constraintStart_toStartOf="@id/button_edit_service"
+        app:layout_constraintTop_toTopOf="@id/button_edit_service" />
 </androidx.constraintlayout.widget.ConstraintLayout>

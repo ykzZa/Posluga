@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ServiceViewModel @Inject constructor(
     private val repository: ServiceRepository
-): ViewModel() {
+) : ViewModel() {
 
     private val _category = MutableLiveData<String>()
     private val _subCategory = MutableLiveData<String>()
@@ -34,6 +34,16 @@ class ServiceViewModel @Inject constructor(
     private val _imagesUploaded = MutableLiveData<UiState<List<String>>>()
     val imagesUploaded: LiveData<UiState<List<String>>>
         get() = _imagesUploaded
+
+    private val _service = MutableLiveData<UiState<Service>>()
+    val service: LiveData<UiState<Service>>
+        get() = _service
+
+    private val _serviceImages = MutableLiveData<List<String>?>()
+    val serviceImages: LiveData<List<String>?>
+        get() = _serviceImages
+
+    private val photosToRemove = mutableSetOf<String>()
 
     fun setCategory(category: String) {
         _category.value = category
@@ -54,32 +64,72 @@ class ServiceViewModel @Inject constructor(
     }
 
     fun setImagesUri(list: List<Uri>) {
+        _serviceImages.value?.let {
+            photosToRemove.addAll(it)
+        }
+        _serviceImages.value = null
         _imagesUriList.value = list
     }
 
     fun removeImage(imageUrl: Uri) {
-        val list = _imagesUriList.value?.toMutableList()
-        list?.remove(imageUrl)
-        list?.let {
-            _imagesUriList.value = it
+        if (_serviceImages.value == null) {
+            val list = _imagesUriList.value?.toMutableList()
+            list?.remove(imageUrl)
+            list?.let {
+                _imagesUriList.value = it
+            }
+        } else {
+            photosToRemove.add(imageUrl.toString())
+            val list = _serviceImages.value?.toMutableList()
+            list?.remove(imageUrl.toString())
+            list?.let {
+                _serviceImages.value = it
+            }
         }
+    }
+
+    fun setServiceImages(list: List<String>) {
+        _serviceImages.value = list
     }
 
     fun uploadImages(
         userId: String,
     ) {
         _servicePosted.value = UiState.Loading
-        viewModelScope.launch {
-            repository.uploadImages(
-                userId,
-                _imagesUriList.value ?: emptyList()
-            ) {
-                _imagesUploaded.value = it
+        if (_serviceImages.value == null) {
+            viewModelScope.launch {
+                repository.uploadImages(
+                    userId,
+                    _imagesUriList.value ?: emptyList()
+                ) {
+                    _imagesUploaded.value = it
+                }
+                repository.deleteImages(
+                    photosToRemove.toList()
+                ) {}
+            }
+        } else {
+            viewModelScope.launch {
+                repository.deleteImages(
+                    photosToRemove.toList()
+                ) {
+                    _imagesUploaded.value = it
+                }
             }
         }
     }
 
+    fun getService(
+        serviceId: String
+    ) {
+        _service.value = UiState.Loading
+        repository.getService(serviceId) {
+            _service.value = it
+        }
+    }
+
     fun postService(
+        serviceId: String?,
         title: String,
         description: String,
         authorId: String,
@@ -87,9 +137,9 @@ class ServiceViewModel @Inject constructor(
         price: String,
         listImages: List<String>
     ) {
-        if(validateData(title, description)) {
+        if (validateData(title, description)) {
             val service = Service(
-                "",
+                serviceId ?: "",
                 title,
                 description,
                 _category.value!!,
@@ -99,7 +149,7 @@ class ServiceViewModel @Inject constructor(
                 price.toIntOrNull() ?: 0,
                 _state.value!!,
                 _city.value!!
-                )
+            )
             repository.postService(
                 service,
                 listImages
@@ -112,26 +162,26 @@ class ServiceViewModel @Inject constructor(
     private fun validateData(
         title: String,
         description: String
-        ): Boolean {
-        if(title.isBlank()) {
+    ): Boolean {
+        if (title.isBlank()) {
             _servicePosted.value = UiState.Error(
                 "Title can't be blank"
             )
             return false
         }
-        if(description.isBlank()) {
+        if (description.isBlank()) {
             _servicePosted.value = UiState.Error(
                 "Description can't be blank"
             )
             return false
         }
-        if(_category.value.isNullOrBlank() || _subCategory.value.isNullOrBlank()) {
+        if (_category.value.isNullOrBlank() || _subCategory.value.isNullOrBlank()) {
             _servicePosted.value = UiState.Error(
                 "You need to choose category"
             )
             return false
         }
-        if(_state.value.isNullOrBlank() || _city.value.isNullOrBlank()) {
+        if (_state.value.isNullOrBlank() || _city.value.isNullOrBlank()) {
             _servicePosted.value = UiState.Error(
                 "You need to choose geo of service"
             )

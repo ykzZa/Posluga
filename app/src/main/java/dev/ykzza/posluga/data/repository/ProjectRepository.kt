@@ -44,4 +44,9 @@ interface ProjectRepository {
         imagesUrl: List<Uri>,
         result: (UiState<List<String>>) -> Unit
     )
+
+    suspend fun deleteImages(
+        imageUrls: List<String>,
+        result: (UiState<List<String>>) -> Unit
+    )
 }

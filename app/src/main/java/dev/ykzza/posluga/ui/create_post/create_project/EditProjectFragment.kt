@@ -8,13 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import dev.ykzza.posluga.R
-import dev.ykzza.posluga.databinding.FragmentCreateProjectBinding
+import dev.ykzza.posluga.databinding.FragmentEditProjectBinding
 import dev.ykzza.posluga.ui.create_post.ImagesAdapter
 import dev.ykzza.posluga.util.UiState
 import dev.ykzza.posluga.util.hideView
@@ -26,14 +28,15 @@ import javax.inject.Inject
 import javax.inject.Named
 
 @AndroidEntryPoint
-class CreateProjectFragment : Fragment(), ImagesAdapter.OnItemClickListener {
+class EditProjectFragment : Fragment(), ImagesAdapter.OnItemClickListener {
 
-    private var _binding: FragmentCreateProjectBinding? = null
-    private val binding: FragmentCreateProjectBinding
-        get() = _binding ?: throw RuntimeException("FragmentCreateProjectBinding is null")
+    private var _binding: FragmentEditProjectBinding? = null
+    private val binding: FragmentEditProjectBinding
+        get() = _binding ?: throw RuntimeException("FragmentEditProjectBinding can't be null")
 
     private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private lateinit var viewModel: ProjectViewModel
+    private val args: EditProjectFragmentArgs by navArgs()
 
     private val recyclerViewAdapter by lazy {
         ImagesAdapter(this)
@@ -69,7 +72,7 @@ class CreateProjectFragment : Fragment(), ImagesAdapter.OnItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentCreateProjectBinding.inflate(inflater, container, false)
+        _binding = FragmentEditProjectBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -78,34 +81,104 @@ class CreateProjectFragment : Fragment(), ImagesAdapter.OnItemClickListener {
         binding.recyclerViewImages.adapter = recyclerViewAdapter
         setOnClickListeners()
         observeViewModel()
+        viewModel.getProject(
+            args.projectId
+        )
     }
 
     private fun observeViewModel() {
+        viewModel.project.observe(viewLifecycleOwner) { uiState ->
+            when (uiState) {
+                is UiState.Loading -> {
+                    hideUi()
+                    binding.apply {
+                        progressBar.showView()
+                    }
+                }
+
+                is UiState.Success -> {
+                    val project = uiState.data
+                    binding.apply {
+                        progressBar.hideView()
+                        editTextProjectTitle.setText(project.title)
+                        editTextProjectDescription.setText(project.description)
+                        recyclerViewAdapter.submitList(project.images.map {
+                            it.toUri()
+                        })
+                        viewModel.setCategory(project.category)
+                        val categoryIndex = categories.indexOf(project.category)
+                        val stateIndex = states.indexOf(project.state)
+                        prepareAutoCompleteTexts(categoryIndex, stateIndex)
+                        autoCompleteTextCategory.setText(
+                            project.category, false
+                        )
+                        viewModel.setSubCategory(project.subCategory)
+                        autoCompleteTextSubcategory.setText(
+                            project.subCategory, false
+                        )
+                        viewModel.setState(project.state)
+                        autoCompleteTextState.setText(
+                            project.state, false
+                        )
+                        viewModel.setCity(project.city)
+                        autoCompleteTextCity.setText(
+                            project.city, false
+                        )
+                        viewModel.setProjectImages(project.images)
+                        if (project.price != 0) {
+                            editTextProjectPrice.setText(
+                                project.price.toString()
+                            )
+                        }
+                    }
+                    showUi()
+                }
+
+                else -> {
+                    showToast("Oops, something went wrong")
+                    findNavController().popBackStack()
+                }
+            }
+        }
         viewModel.imagesUriList.observe(viewLifecycleOwner) {
             recyclerViewAdapter.submitList(it)
+        }
+        viewModel.projectImages.observe(viewLifecycleOwner) {
+            if (it != null) {
+                recyclerViewAdapter.submitList(it.map { str ->
+                    str.toUri()
+                })
+            }
         }
         viewModel.imagesUploaded.observe(viewLifecycleOwner) { uiState ->
             when (uiState) {
                 is UiState.Success -> {
                     binding.apply {
+                        val listImages: List<String> = if(viewModel.projectImages.value != null &&
+                            viewModel.projectImages.value?.isEmpty() == false
+                        ) {
+                            viewModel.projectImages.value!!
+                        } else {
+                            uiState.data
+                        }
                         viewModel.postProject(
-                            null,
+                            args.projectId,
                             editTextProjectTitle.text.toString(),
                             editTextProjectDescription.text.toString(),
                             firebaseAuth.uid!!,
                             LocalDateTime.now()
                                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
                             editTextProjectPrice.text.toString(),
-                            uiState.data
+                            listImages
                         )
                     }
                 }
 
                 else -> {
-                    showToast("Failed to upload images, try again")
+                    showToast("Failed to delete images, try again")
                     binding.apply {
                         progressBar.hideView()
-                        buttonCreateProject.setText(R.string.button_create_project_text)
+                        buttonEditProject.setText(R.string.button_edit_project_text)
                     }
                 }
             }
@@ -115,14 +188,14 @@ class CreateProjectFragment : Fragment(), ImagesAdapter.OnItemClickListener {
                 is UiState.Error -> {
                     binding.apply {
                         progressBar.hideView()
-                        buttonCreateProject.setText(R.string.button_create_project_text)
+                        buttonEditProject.setText(R.string.button_edit_project_text)
                     }
                     showToast(uiState.errorMessage)
                 }
 
                 is UiState.Loading -> {
                     binding.apply {
-                        buttonCreateProject.text = ""
+                        buttonEditProject.text = ""
                         progressBar.showView()
                     }
                 }
@@ -130,10 +203,10 @@ class CreateProjectFragment : Fragment(), ImagesAdapter.OnItemClickListener {
                 is UiState.Success -> {
                     binding.apply {
                         progressBar.hideView()
-                        buttonCreateProject.setText(R.string.button_create_project_text)
+                        buttonEditProject.setText(R.string.button_edit_project_text)
                     }
                     findNavController().popBackStack()
-                    showToast("Project has been posted")
+                    showToast("Project has been updated")
                 }
             }
         }
@@ -144,29 +217,49 @@ class CreateProjectFragment : Fragment(), ImagesAdapter.OnItemClickListener {
             buttonBack.setOnClickListener {
                 findNavController().popBackStack()
             }
-            buttonCreateProject.setOnClickListener {
+            textViewImages.setOnClickListener {
+                pickImagesFromGallery()
+            }
+            buttonEditProject.setOnClickListener {
                 viewModel.uploadImages(
                     firebaseAuth.uid ?: throw RuntimeException("User is not logged")
                 )
             }
-            textViewImages.setOnClickListener {
-                pickImagesFromGallery()
-            }
         }
-        prepareAutoCompleteTexts()
+    }
+
+    private fun hideUi() {
+        binding.apply {
+            textViewTitle.hideView()
+            textViewSubtitle.hideView()
+            scrollViewContainer.hideView()
+            buttonEditProject.hideView()
+        }
+    }
+
+    private fun showUi() {
+        binding.apply {
+            textViewTitle.showView()
+            textViewSubtitle.showView()
+            scrollViewContainer.showView()
+            buttonEditProject.showView()
+        }
     }
 
     private fun pickImagesFromGallery() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-        startActivityForResult(Intent.createChooser(intent, "Select Pictures"), PICK_IMAGES_REQUEST)
+        startActivityForResult(
+            Intent.createChooser(intent, "Select Pictures"),
+            IMAGE_PICKER_REQUEST
+        )
     }
 
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PICK_IMAGES_REQUEST && resultCode == Activity.RESULT_OK) {
+        if (requestCode == IMAGE_PICKER_REQUEST && resultCode == Activity.RESULT_OK) {
             val imageUris = mutableListOf<Uri>()
             if (data?.clipData != null) {
                 val count = data.clipData!!.itemCount
@@ -185,10 +278,26 @@ class CreateProjectFragment : Fragment(), ImagesAdapter.OnItemClickListener {
     }
 
 
-    private fun prepareAutoCompleteTexts() {
+    private fun prepareAutoCompleteTexts(chCategory: Int = 0, chState: Int = 0) {
         binding.apply {
-            var chosenCategoryIndex = 0
-            var chosenStateIndex = 0
+            var chosenCategoryIndex = chCategory
+            var chosenStateIndex = chState
+            if(chCategory != 0) {
+                subCategoryAdapter = ArrayAdapter.createFromResource(
+                    requireContext(),
+                    subCategories[chosenCategoryIndex],
+                    android.R.layout.simple_dropdown_item_1line
+                )
+                autoCompleteTextSubcategory.setAdapter(subCategoryAdapter)
+            }
+            if(chState != 0) {
+                citiesAdapter = ArrayAdapter.createFromResource(
+                    requireContext(),
+                    cities[chosenStateIndex],
+                    android.R.layout.simple_dropdown_item_1line
+                )
+                autoCompleteTextCity.setAdapter(citiesAdapter)
+            }
             autoCompleteTextCategory.setAdapter(categoryAdapter)
             autoCompleteTextCategory.setOnItemClickListener { _,
                                                               _,
@@ -241,11 +350,11 @@ class CreateProjectFragment : Fragment(), ImagesAdapter.OnItemClickListener {
         _binding = null
     }
 
-    companion object {
-        const val PICK_IMAGES_REQUEST = 121
-    }
-
     override fun onCancelClick(image: Uri) {
         viewModel.removeImage(image)
+    }
+
+    companion object {
+        const val IMAGE_PICKER_REQUEST = 100
     }
 }

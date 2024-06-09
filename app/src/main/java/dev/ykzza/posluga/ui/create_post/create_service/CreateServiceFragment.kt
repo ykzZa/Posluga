@@ -89,6 +89,7 @@ class CreateServiceFragment : Fragment(), ImagesAdapter.OnItemClickListener {
                 is UiState.Success -> {
                     binding.apply {
                         viewModel.postService(
+                            null,
                             editTextServiceTitle.text.toString(),
                             editTextServiceDescription.text.toString(),
                             firebaseAuth.uid!!,
@@ -112,6 +113,7 @@ class CreateServiceFragment : Fragment(), ImagesAdapter.OnItemClickListener {
             when(uiState) {
                 is UiState.Error -> {
                     binding.apply {
+                        progressBar.hideView()
                         buttonCreateService.setText(R.string.button_create_service_text)
                     }
                     showToast(uiState.errorMessage)
@@ -178,7 +180,6 @@ class CreateServiceFragment : Fragment(), ImagesAdapter.OnItemClickListener {
             viewModel.setImagesUri(imageUris)
         }
     }
-
 
     private fun prepareAutoCompleteTexts() {
         binding.apply {

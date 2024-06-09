@@ -94,4 +94,9 @@
     <string name="no_saved_text">You don\'t have saved posts =(</string>
     <string name="menu_edit_text">Edit</string>
     <string name="menu_delete_text">Delete</string>
+    <string name="edit_service_title_text">Edit a service</string>
+    <string name="edit_service_subtitle_text">Write everything in detail</string>
+    <string name="button_edit_service_text">Update service</string>
+    <string name="button_edit_project_text">Update a project</string>
+    <string name="edit_project_title_text">Edit a project</string>
 </resources>

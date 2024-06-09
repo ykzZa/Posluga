@@ -3,10 +3,12 @@ package dev.ykzza.posluga.ui.menu.my_projects
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.ykzza.posluga.data.entities.Project
 import dev.ykzza.posluga.data.repository.ProjectRepository
 import dev.ykzza.posluga.util.UiState
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -37,10 +39,24 @@ class UserProjectsViewModel @Inject constructor(
         projectId: String
     ) {
         _projectDeleted.value = UiState.Loading
-        repository.deleteProject(
-            projectId
-        ) {
-            _projectDeleted.value = it
+        repository.getProject(projectId) { uiState ->
+            when (uiState) {
+                is UiState.Success -> {
+                    viewModelScope.launch {
+                        repository.deleteImages(uiState.data.images) {
+                            repository.deleteProject(
+                                projectId
+                            ) {
+                                _projectDeleted.value = it
+                            }
+                        }
+                    }
+                }
+
+                else -> {
+                    _projectDeleted.value = UiState.Error("Failed to delete project!")
+                }
+            }
         }
     }
 }

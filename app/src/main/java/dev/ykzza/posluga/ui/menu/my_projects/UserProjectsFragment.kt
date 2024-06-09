@@ -109,7 +109,6 @@ class UserProjectsFragment : Fragment(), MyProjectsAdapter.OnItemClickListener,
         viewModel.projectDeleted.observe(viewLifecycleOwner) { uiState ->
             when(uiState) {
                 is UiState.Success -> {
-                    showToast("Service deleted!")
                     viewModel.getUserProjects(
                         args.userId
                     )
@@ -163,7 +162,10 @@ class UserProjectsFragment : Fragment(), MyProjectsAdapter.OnItemClickListener,
     }
 
     override fun onEditClick(projectId: String) {
-
+        val action = UserProjectsFragmentDirections.actionUserProjectsFragmentToEditProjectFragment(
+            projectId
+        )
+        findNavController().navigate(action)
     }
 
     override fun onDeleteClick(projectId: String) {
