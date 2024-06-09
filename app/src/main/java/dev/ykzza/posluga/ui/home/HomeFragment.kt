@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import dev.ykzza.posluga.R
 import dev.ykzza.posluga.databinding.FragmentHomeBinding
 import dev.ykzza.posluga.ui.home.projects.BrowseProjectsFragment
 import dev.ykzza.posluga.ui.home.services.BrowseServicesFragment
@@ -37,8 +38,8 @@ class HomeFragment : Fragment() {
             viewPager.adapter = FragmentAdapter(this@HomeFragment)
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
                 tab.text = when(position) {
-                    0 -> "Services"
-                    1 -> "Projects"
+                    0 -> getString(R.string.services_text)
+                    1 -> getString(R.string.projects_text)
                     else -> null
                 }
             }.attach()

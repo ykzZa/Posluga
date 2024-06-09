@@ -19,16 +19,31 @@ interface ChatRepository {
 
     fun getUserChats(
         userId: String,
-        result: (UiState<List<Chat>>) -> Unit
+        result: (List<Chat>) -> Unit
     )
 
     fun getChatById(
         chatId: String,
-        result: (UiState<Chat>) -> Unit
+        result: (Chat?) -> Unit
     )
 
     fun createChat(
         chat: Chat,
-        result: (UiState<String>) -> Unit
+        result: (Chat?) -> Unit
+    )
+
+    fun checkChatExist(
+        members: List<String>,
+        result: (UiState<Boolean>) -> Unit
+    )
+
+    fun getChatByMembers(
+        members: List<String>,
+        result: (Chat?) -> Unit
+    )
+
+    fun loadMessages(
+        chatId: String,
+        result: (UiState<List<Message>>) -> Unit
     )
 }

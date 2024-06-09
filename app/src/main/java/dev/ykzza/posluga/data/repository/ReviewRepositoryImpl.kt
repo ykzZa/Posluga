@@ -33,23 +33,19 @@ class ReviewRepositoryImpl(
             }
     }
 
-    override fun getUserReviews(userId: String, result: (UiState<List<Review>>) -> Unit) {
+    override fun getUserReviews(userId: String, result: (List<Review>) -> Unit) {
         db.collection(Constants.REVIEWS_COLLECTION)
             .whereEqualTo("userId", userId)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 val reviews = querySnapshot.toObjects(Review::class.java)
                 result.invoke(
-                    UiState.Success(
-                        reviews
-                    )
+                    reviews
                 )
             }
             .addOnFailureListener {
                 result.invoke(
-                    UiState.Error(
-                        it.localizedMessage ?: "Oops, something went wrong"
-                    )
+                    emptyList()
                 )
             }
     }

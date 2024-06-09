@@ -19,37 +19,54 @@ class ReviewViewModel @Inject constructor(
     private val userRepository: UserRepository,
 ) : ViewModel() {
 
-    private val _userReviews = MutableLiveData<UiState<List<Review>>>()
-    val userReviews: LiveData<UiState<List<Review>>>
+    private val _userReviews = MutableLiveData<List<Review>>()
+    val userReviews: LiveData<List<Review>>
         get() = _userReviews
 
     private val _addedReview = MutableLiveData<UiState<String>>()
     val addedReview: LiveData<UiState<String>>
         get() = _addedReview
 
-    private val _authors = MutableLiveData<UiState<List<User>>>()
-    val authors: LiveData<UiState<List<User>>>
+    private val _authors = MutableLiveData<List<User>>()
+    val authors: LiveData<List<User>>
         get() = _authors
+
+    private val _reviewAuthorPairs = MutableLiveData<List<Pair<Review, User>>>()
+    val reviewAuthorsPairs: LiveData<List<Pair<Review, User>>>
+        get() = _reviewAuthorPairs
 
     fun getReviews(
         userId: String
     ) {
-        _userReviews.value = UiState.Loading
         reviewRepository.getUserReviews(
             userId
         ) {
             _userReviews.value = it
+            if(it.isNotEmpty()){
+                getUsers(
+                    it.map {  reviewIt ->
+                        reviewIt.authorId
+                    }
+                ) {
+                    val zipped = _userReviews.value?.zip(_authors.value!!)
+                    _reviewAuthorPairs.value = zipped ?: emptyList()
+                }
+            } else {
+                _reviewAuthorPairs.value = emptyList()
+            }
         }
     }
 
-    fun getUsers(
-        usersId: List<String>
+    private fun getUsers(
+        usersId: List<String>,
+        onEnd: () -> Unit
     ) {
         viewModelScope.launch {
-            userRepository.getReviewsAuthors(
+            userRepository.getUsersListByIds(
                 usersId
             ) {
                 _authors.value = it
+                onEnd.invoke()
             }
         }
     }

@@ -81,6 +81,9 @@
         <action
             android:id="@+id/action_profileFragment_to_userServicesFragment"
             app:destination="@id/userServicesFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_openedChatFragment"
+            app:destination="@id/openedChatFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
@@ -186,5 +189,18 @@
         <argument
             android:name="projectId"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/openedChatFragment"
+        android:name="dev.ykzza.posluga.ui.chats.OpenedChatFragment"
+        android:label="fragment_opened_chat"
+        tools:layout="@layout/fragment_opened_chat" >
+        <argument
+            android:name="chatId"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="userId"
+            app:argType="string"/>
     </fragment>
 </navigation>

@@ -16,10 +16,6 @@
     <string name="register_title_text">Sign up to Posluga!</string>
     <string name="register_second_title_text">Please enter your details</string>
 
-    <!-- Menu Fragment Special -->
-    <string name="menu_title_text">Welcome to Posluga!</string>
-    <string name="menu_subtitle_text">Please log in to your own account to get the full functionality of the application: create services, projects, communicate in the application, etc.</string>
-
     <!-- Edit Profile Fragment Special -->
     <string name="edit_text_phone_hint_text">Write your phone number: ex. 012 345 6789</string>
     <string name="edit_text_instagram_hint_text">Write you instagram tag</string>
@@ -99,4 +95,16 @@
     <string name="button_edit_service_text">Update service</string>
     <string name="button_edit_project_text">Update a project</string>
     <string name="edit_project_title_text">Edit a project</string>
+    <string name="no_chats_text">We find 0 chats =(</string>
+    <string name="no_messages_text">No messages right now</string>
+    <string name="edit_text_message_text">Type your message...</string>
+    <string name="button_open_chat_text">Open chat</string>
+    <string name="menu_tex">Menu</string>
+    <string name="chats_text">Chats</string>
+    <string name="create_text">Create</string>
+    <string name="saved_text">Saved</string>
+    <string name="home_text">Home</string>
+    <string name="services_text">Services</string>
+    <string name="projects_text">Projects</string>
+
 </resources>

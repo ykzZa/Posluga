@@ -1,6 +1,11 @@
 package dev.ykzza.posluga.data.entities
 
 data class Chat(
-    val chatId: String,
-    val members: List<String>
-)
+    var chatId: String,
+    var members: List<String>
+) {
+    constructor() : this(
+        "",
+        emptyList()
+    )
+}

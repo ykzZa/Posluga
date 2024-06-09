@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.ykzza.posluga.data.entities.Service
 import dev.ykzza.posluga.data.repository.ServiceRepository
 import dev.ykzza.posluga.util.UiState
+import dev.ykzza.posluga.util.isEnglish
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -138,23 +139,27 @@ class ServiceViewModel @Inject constructor(
         listImages: List<String>
     ) {
         if (validateData(title, description)) {
-            val service = Service(
-                serviceId ?: "",
-                title,
-                description,
-                _category.value!!,
-                _subCategory.value!!,
-                authorId,
-                date,
-                price.toIntOrNull() ?: 0,
-                _state.value!!,
-                _city.value!!
-            )
-            repository.postService(
-                service,
-                listImages
-            ) { uiState ->
-                _servicePosted.value = uiState
+            if(isEnglish(_category.value!!)) {
+                val service = Service(
+                    serviceId ?: "",
+                    title,
+                    description,
+                    _category.value!!,
+                    _subCategory.value!!,
+                    authorId,
+                    date,
+                    price.toIntOrNull() ?: 0,
+                    _state.value!!,
+                    _city.value!!
+                )
+                repository.postService(
+                    service,
+                    listImages
+                ) { uiState ->
+                    _servicePosted.value = uiState
+                }
+            } else {
+
             }
         }
     }

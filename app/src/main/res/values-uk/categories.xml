@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="categories">
+        <item>Викладання</item>
+        <item>Будівельні роботи</item>
+        <item>Ремонт обладнання</item>
+        <item>Різноробочий</item>
+        <item>Cleaning</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="other_subcategory">
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="tutoring_subcategory">
+        <item>Шкільний репетитор</item>
+        <item>Автоінструктор</item>
+        <item>Викладач іноземних мов</item>
+        <item>Викладач музики</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="building_works_subcategory">
+        <item>Бетонні роботи</item>
+        <item>Зварювальні роботи</item>
+        <item>Кладка цегли</item>
+        <item>Розбір завалів</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="equipment_repair_subcategory">
+        <item>Ремонт великих побутових приладів</item>
+        <item>Ремонт малих побутових приладів</item>
+        <item>Ремонт мобільних телефонів</item>
+        <item>Ремонт ноутбуків</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="handyman_subcategory">
+        <item>Сантехнік</item>
+        <item>Електрик</item>
+        <item>Слюсар</item>
+        <item>Чоловік на годину</item>
+        <item>Інше</item>
+    </string-array>
+
+    <string-array name="cleaning_subcategory">
+        <item>Прибирання квартир</item>
+        <item>Прибирання будинків</item>
+        <item>Прибирання території</item>
+        <item>Дезінсекція</item>
+        <item>Інше</item>
+    </string-array>
+</resources>
