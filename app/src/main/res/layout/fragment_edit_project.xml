@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.create_post.create_service.CreateServiceFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.create_post.create_project.EditProjectFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
         android:id="@+id/button_back"
@@ -16,13 +16,23 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/black" />
 
+    <ProgressBar
+        android:visibility="invisible"
+        android:id="@+id/page_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/text_view_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/nunitosans_7pt_extra_bold"
-        android:text="@string/create_service_title_text"
+        android:text="@string/edit_project_title_text"
         android:textColor="@color/black"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/nunitosans_7pt_medium"
-        android:text="@string/create_service_subtitle_text"
+        android:text="@string/create_project_subtitle_text"
         android:textAlignment="center"
         android:textColor="@color/grey"
         android:textSize="18sp"
@@ -49,7 +59,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@id/button_create_service"
+        app:layout_constraintBottom_toTopOf="@id/button_edit_project"
         app:layout_constraintTop_toBottomOf="@id/text_view_subtitle">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -57,31 +67,31 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/text_view_service_title"
+                android:id="@+id/text_view_project_title"
                 style="@style/textViewEditTextLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="@string/service_title_text"
+                android:text="@string/project_title_text"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/edit_text_service_title"
+                android:id="@+id/edit_text_project_title"
                 style="@style/inputEditTextStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
-                android:hint="@string/edit_text_service_title_hint"
+                android:hint="@string/edit_text_project_title_hint"
                 android:maxLength="50"
                 android:maxLines="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_view_service_title" />
+                app:layout_constraintTop_toBottomOf="@id/text_view_project_title" />
 
             <TextView
-                android:id="@+id/text_view_service_description"
+                android:id="@+id/text_view_project_description"
                 style="@style/textViewEditTextLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -89,23 +99,23 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/description_text"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/edit_text_service_title" />
+                app:layout_constraintTop_toBottomOf="@id/edit_text_project_title" />
 
             <EditText
-                android:id="@+id/edit_text_service_description"
+                android:id="@+id/edit_text_project_description"
                 style="@style/inputEditTextStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
-                android:hint="@string/edit_text_service_description_hint"
+                android:hint="@string/edit_text_project_description_hint"
                 android:inputType="textMultiLine"
                 android:lines="5"
                 android:maxLength="500"
                 android:scrollbars="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_view_service_description" />
+                app:layout_constraintTop_toBottomOf="@id/text_view_project_description" />
 
             <TextView
                 android:id="@+id/text_view_images"
@@ -118,7 +128,7 @@
                 android:drawablePadding="8dp"
                 android:text="@string/images_text"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/edit_text_service_description" />
+                app:layout_constraintTop_toBottomOf="@id/edit_text_project_description" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_images"
@@ -135,7 +145,7 @@
                 tools:listitem="@layout/item_image" />
 
             <TextView
-                android:id="@+id/text_view_service_category"
+                android:id="@+id/text_view_project_category"
                 style="@style/textViewEditTextLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -154,7 +164,7 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_view_service_category">
+                app:layout_constraintTop_toBottomOf="@id/text_view_project_category">
 
                 <AutoCompleteTextView
                     android:id="@+id/auto_complete_text_category"
@@ -166,7 +176,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/text_view_service_subcategory"
+                android:id="@+id/text_view_project_subcategory"
                 style="@style/textViewEditTextLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -185,7 +195,7 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_view_service_subcategory">
+                app:layout_constraintTop_toBottomOf="@id/text_view_project_subcategory">
 
                 <AutoCompleteTextView
                     android:id="@+id/auto_complete_text_subcategory"
@@ -197,7 +207,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/text_view_service_state"
+                android:id="@+id/text_view_project_state"
                 style="@style/textViewEditTextLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -216,7 +226,7 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_view_service_state">
+                app:layout_constraintTop_toBottomOf="@id/text_view_project_state">
 
                 <AutoCompleteTextView
                     android:id="@+id/auto_complete_text_state"
@@ -228,7 +238,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/text_view_service_city"
+                android:id="@+id/text_view_project_city"
                 style="@style/textViewEditTextLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -247,7 +257,7 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_view_service_city">
+                app:layout_constraintTop_toBottomOf="@id/text_view_project_city">
 
                 <AutoCompleteTextView
                     android:id="@+id/auto_complete_text_city"
@@ -259,7 +269,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/text_view_service_price"
+                android:id="@+id/text_view_project_price"
                 style="@style/textViewEditTextLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -270,33 +280,33 @@
                 app:layout_constraintTop_toBottomOf="@id/text_input_city" />
 
             <EditText
-                android:id="@+id/edit_text_service_price"
+                android:id="@+id/edit_text_project_price"
                 style="@style/inputEditTextStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
                 android:hint="@string/edit_text_service_price_hint"
-                android:inputType="number"
                 android:maxLength="10"
                 android:maxLines="1"
+                android:inputType="number"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_view_service_price" />
+                app:layout_constraintTop_toBottomOf="@id/text_view_project_price" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_create_service"
+        android:id="@+id/button_edit_project"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/black"
         android:fontFamily="@font/nunitosans_7pt_extra_bold"
-        android:text="@string/button_create_service_text"
+        android:text="@string/button_edit_project_text"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:cornerRadius="5dp"
@@ -311,8 +321,8 @@
         android:layout_height="0dp"
         android:layout_margin="8dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/button_create_service"
-        app:layout_constraintEnd_toEndOf="@id/button_create_service"
-        app:layout_constraintStart_toStartOf="@id/button_create_service"
-        app:layout_constraintTop_toTopOf="@id/button_create_service" />
+        app:layout_constraintBottom_toBottomOf="@id/button_edit_project"
+        app:layout_constraintEnd_toEndOf="@id/button_edit_project"
+        app:layout_constraintStart_toStartOf="@id/button_edit_project"
+        app:layout_constraintTop_toTopOf="@id/button_edit_project" />
 </androidx.constraintlayout.widget.ConstraintLayout>

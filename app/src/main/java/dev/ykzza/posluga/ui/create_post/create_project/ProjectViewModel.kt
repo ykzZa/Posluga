@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ProjectViewModel @Inject constructor(
     private val repository: ProjectRepository
-): ViewModel() {
+) : ViewModel() {
 
     private val _category = MutableLiveData<String>()
     private val _subCategory = MutableLiveData<String>()
@@ -34,6 +34,16 @@ class ProjectViewModel @Inject constructor(
     private val _imagesUploaded = MutableLiveData<UiState<List<String>>>()
     val imagesUploaded: LiveData<UiState<List<String>>>
         get() = _imagesUploaded
+
+    private val _project = MutableLiveData<UiState<Project>>()
+    val project: LiveData<UiState<Project>>
+        get() = _project
+
+    private val _projectImages = MutableLiveData<List<String>?>()
+    val projectImages: LiveData<List<String>?>
+        get() = _projectImages
+
+    private val photosToRemove = mutableSetOf<String>()
 
     fun setCategory(category: String) {
         _category.value = category
@@ -54,32 +64,72 @@ class ProjectViewModel @Inject constructor(
     }
 
     fun setImagesUri(list: List<Uri>) {
+        _projectImages.value?.let {
+            photosToRemove.addAll(it)
+        }
+        _projectImages.value = null
         _imagesUriList.value = list
     }
 
     fun removeImage(imageUrl: Uri) {
-        val list = _imagesUriList.value?.toMutableList()
-        list?.remove(imageUrl)
-        list?.let {
-            _imagesUriList.value = it
+        if(_projectImages.value == null) {
+            val list = _imagesUriList.value?.toMutableList()
+            list?.remove(imageUrl)
+            list?.let {
+                _imagesUriList.value = it
+            }
+        } else {
+            photosToRemove.add(imageUrl.toString())
+            val list = _projectImages.value?.toMutableList()
+            list?.remove(imageUrl.toString())
+            list?.let {
+                _projectImages.value = it
+            }
         }
+    }
+
+    fun setProjectImages(list: List<String>) {
+        _projectImages.value = list
     }
 
     fun uploadImages(
         userId: String,
     ) {
         _projectPosted.value = UiState.Loading
-        viewModelScope.launch {
-            repository.uploadImages(
-                userId,
-                _imagesUriList.value ?: emptyList()
-            ) {
-                _imagesUploaded.value = it
+        if(_projectImages.value == null) {
+            viewModelScope.launch {
+                repository.uploadImages(
+                    userId,
+                    _imagesUriList.value ?: emptyList()
+                ) {
+                    _imagesUploaded.value = it
+                }
+                repository.deleteImages(
+                    photosToRemove.toList()
+                ){}
+            }
+        } else {
+            viewModelScope.launch {
+                repository.deleteImages(
+                    photosToRemove.toList()
+                ) {
+                    _imagesUploaded.value = it
+                }
             }
         }
     }
 
+    fun getProject(
+        projectId: String
+    ) {
+        _project.value = UiState.Loading
+        repository.getProject(projectId) {
+            _project.value = it
+        }
+    }
+
     fun postProject(
+        projectId: String?,
         title: String,
         description: String,
         authorId: String,
@@ -87,9 +137,9 @@ class ProjectViewModel @Inject constructor(
         price: String,
         listImages: List<String>
     ) {
-        if(validateData(title, description)) {
+        if (validateData(title, description)) {
             val project = Project(
-                "",
+                projectId ?: "",
                 title,
                 description,
                 _category.value!!,
@@ -113,25 +163,25 @@ class ProjectViewModel @Inject constructor(
         title: String,
         description: String
     ): Boolean {
-        if(title.isBlank()) {
+        if (title.isBlank()) {
             _projectPosted.value = UiState.Error(
                 "Title can't be blank"
             )
             return false
         }
-        if(description.isBlank()) {
+        if (description.isBlank()) {
             _projectPosted.value = UiState.Error(
                 "Description can't be blank"
             )
             return false
         }
-        if(_category.value.isNullOrBlank() || _subCategory.value.isNullOrBlank()) {
+        if (_category.value.isNullOrBlank() || _subCategory.value.isNullOrBlank()) {
             _projectPosted.value = UiState.Error(
                 "You need to choose category"
             )
             return false
         }
-        if(_state.value.isNullOrBlank() || _city.value.isNullOrBlank()) {
+        if (_state.value.isNullOrBlank() || _city.value.isNullOrBlank()) {
             _projectPosted.value = UiState.Error(
                 "You need to choose geo of service"
             )

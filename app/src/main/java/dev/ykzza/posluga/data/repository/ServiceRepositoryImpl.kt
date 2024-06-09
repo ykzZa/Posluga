@@ -1,9 +1,11 @@
 package dev.ykzza.posluga.data.repository
 
 import android.net.Uri
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.Filter
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import dev.ykzza.posluga.data.entities.SearchResult
 import dev.ykzza.posluga.data.entities.Service
@@ -26,8 +28,13 @@ class ServiceRepositoryImpl(
         imagesList: List<String>,
         result: (UiState<String>) -> Unit
     ) {
-        val document = db.collection(Constants.SERVICE_COLLECTION).document()
-        service.serviceId = document.id
+        val document: DocumentReference
+        if (service.serviceId == "") {
+            document = db.collection(Constants.SERVICE_COLLECTION).document()
+            service.serviceId = document.id
+        } else {
+            document = db.collection(Constants.SERVICE_COLLECTION).document(service.serviceId)
+        }
         service.images = imagesList
         document
             .set(service)
@@ -294,5 +301,32 @@ class ServiceRepositoryImpl(
         }
     }
 
+    override suspend fun deleteImages(
+        imageUrls: List<String>,
+        result: (UiState<List<String>>) -> Unit
+    ) {
+        try {
+            withContext(Dispatchers.IO) {
+                imageUrls.map { image ->
+                    async {
+                        FirebaseStorage
+                            .getInstance()
+                            .getReferenceFromUrl(image)
+                            .delete()
+                            .await()
+                    }
+                }.awaitAll()
+            }
+            result.invoke(
+                UiState.Success(listOf())
+            )
+        } catch (e: Exception) {
+            result.invoke(
+                UiState.Error(
+                    "Failed to delete images"
+                )
+            )
+        }
+    }
 }
 
