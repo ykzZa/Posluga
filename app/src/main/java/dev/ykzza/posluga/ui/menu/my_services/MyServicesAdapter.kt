@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import dev.ykzza.posluga.R
 import dev.ykzza.posluga.data.entities.Service
 import dev.ykzza.posluga.databinding.ItemPostWithMenuBinding
+import dev.ykzza.posluga.util.convertTimestampToFormattedDateTime
 
 class MyServicesAdapter(
     val onItemClickListener: OnItemClickListener,
@@ -48,8 +49,12 @@ class MyServicesAdapter(
                 }
                 titleTextView.text = service.title
                 geoTextView.text = service.city
-                dateTextView.text = service.date.dropLast(6)
-                timeTextView.text = service.date.takeLast(5)
+                dateTextView.text = convertTimestampToFormattedDateTime(
+                    service.date.seconds
+                ).dropLast(6)
+                timeTextView.text = convertTimestampToFormattedDateTime(
+                    service.date.seconds
+                ).takeLast(5)
                 if(service.price == 0) {
                     priceTextView.text = "Договірна"
                 } else {

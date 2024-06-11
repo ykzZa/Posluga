@@ -36,7 +36,7 @@ class UserProjectsFragment : Fragment(), MyProjectsAdapter.OnItemClickListener,
     }
 
     private val recyclerViewUserProjectsAdapter by lazy {
-        ProjectsAdapter(this)
+        ProjectsAdapter(this, requireContext())
     }
 
     override fun onCreateView(

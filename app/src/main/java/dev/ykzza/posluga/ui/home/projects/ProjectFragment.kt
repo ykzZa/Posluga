@@ -15,10 +15,15 @@ import dev.ykzza.posluga.databinding.FragmentProjectBinding
 import dev.ykzza.posluga.ui.home.SliderAdapter
 import dev.ykzza.posluga.ui.menu.profile.UserViewModel
 import dev.ykzza.posluga.util.UiState
+import dev.ykzza.posluga.util.convertTimestampToFormattedDateTime
+import dev.ykzza.posluga.util.getStringArrayEnglish
+import dev.ykzza.posluga.util.getSystemLanguage
 import dev.ykzza.posluga.util.hideView
 import dev.ykzza.posluga.util.makeViewGone
 import dev.ykzza.posluga.util.showToast
 import dev.ykzza.posluga.util.showView
+import javax.inject.Inject
+import javax.inject.Named
 
 @AndroidEntryPoint
 class ProjectFragment : Fragment() {
@@ -33,6 +38,10 @@ class ProjectFragment : Fragment() {
     private lateinit var userViewModel: UserViewModel
 
     private lateinit var userId: String
+
+    @Inject
+    @Named("cities")
+    lateinit var cities: Array<Int>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -95,13 +104,36 @@ class ProjectFragment : Fragment() {
                         }
                         textViewTitle.text = uiState.data.title
                         if (uiState.data.price == 0) {
-                            textViewPrice.text = "Договірна"
+                            textViewPrice.text = getString(R.string.tradeble_price)
                         } else {
-                            textViewPrice.text = "${uiState.data.price} hrn"
+                            if(getSystemLanguage() == "en") {
+                                textViewPrice.text = "${uiState.data.price} hrn"
+                            } else {
+                                textViewPrice.text = "${uiState.data.price} грн"
+                            }
                         }
                         textViewDescription.text = uiState.data.description
-                        textViewDate.text = uiState.data.date
-                        textViewGeo.text = "${uiState.data.state}, ${uiState.data.city}"
+                        textViewDate.text = convertTimestampToFormattedDateTime(
+                            uiState.data.date.seconds
+                        )
+                        if(getSystemLanguage() == "en") {
+                            textViewGeo.text = "${uiState.data.state} oblast', ${uiState.data.city}"
+                        } else {
+                            val stateIndex =
+                                getStringArrayEnglish(
+                                    requireContext(),
+                                    R.array.states
+                                ).indexOf(uiState.data.state)
+                            val state = requireContext().resources.getStringArray(R.array.states)[stateIndex]
+                            val citiesArray = cities[stateIndex]
+                            val cityIndex =
+                                getStringArrayEnglish(
+                                    requireContext(),
+                                    citiesArray
+                                ).indexOf(uiState.data.city)
+                            val city = requireContext().resources.getStringArray(citiesArray)[cityIndex]
+                            textViewGeo.text = "${state} область, ${city}"
+                        }
                     }
                 }
             }

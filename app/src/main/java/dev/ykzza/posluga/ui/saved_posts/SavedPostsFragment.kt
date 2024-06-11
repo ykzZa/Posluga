@@ -27,7 +27,7 @@ class SavedPostsFragment : Fragment(), ServicesAdapter.OnItemClickListener {
 
     private val recyclerViewAdapter by lazy {
         ServicesAdapter(
-            this
+            this, requireContext()
         )
     }
 

@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.Timestamp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.ykzza.posluga.R
 import dev.ykzza.posluga.data.entities.Service
@@ -155,7 +156,7 @@ class ServiceViewModel @Inject constructor(
         title: String,
         description: String,
         authorId: String,
-        date: String,
+        date: Timestamp,
         price: String,
         listImages: List<String>
     ) {

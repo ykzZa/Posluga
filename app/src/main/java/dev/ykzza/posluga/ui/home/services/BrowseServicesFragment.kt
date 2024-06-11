@@ -28,7 +28,8 @@ class BrowseServicesFragment : Fragment(),
 
     private val recyclerViewAdapter by lazy {
         ServicesAdapter(
-            this
+            this,
+            requireContext()
         )
     }
 

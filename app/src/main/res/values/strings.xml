@@ -106,5 +106,8 @@
     <string name="home_text">Home</string>
     <string name="services_text">Services</string>
     <string name="projects_text">Projects</string>
+    <string name="button_back_text">Go back</string>
+    <string name="tradeble_price">Contract price</string>
+    <string name="user_profile_picture">User profile picture</string>
 
 </resources>

@@ -49,3 +49,8 @@ fun isEnglish(text: String): Boolean {
         else -> false
     }
 }
+
+fun getSystemLanguage(): String {
+    val locale = Locale.getDefault()
+    return locale.language
+}

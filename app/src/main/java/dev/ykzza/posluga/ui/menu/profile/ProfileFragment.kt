@@ -14,6 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.ykzza.posluga.R
 import dev.ykzza.posluga.databinding.FragmentProfileBinding
 import dev.ykzza.posluga.util.UiState
+import dev.ykzza.posluga.util.getSystemLanguage
 import dev.ykzza.posluga.util.hideView
 import dev.ykzza.posluga.util.showToast
 import dev.ykzza.posluga.util.showView
@@ -54,7 +55,10 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setupUi() {
-        if(args.userId != firebaseAuth.uid) {
+        if(firebaseAuth.uid == null) {
+            binding.buttonChat.hideView()
+            binding.buttonEdit.hideView()
+        }else if(args.userId != firebaseAuth.uid) {
             binding.buttonChat.showView()
             binding.buttonEdit.hideView()
         } else {
@@ -146,7 +150,11 @@ class ProfileFragment : Fragment() {
                 is UiState.Success -> {
                     binding.apply {
                         statisticContainer.showView()
-                        textViewProjectsCount.text = "${uiState.data}\nprojects"
+                        if(getSystemLanguage() == "en") {
+                            textViewProjectsCount.text = "${uiState.data}\nprojects"
+                        } else {
+                            textViewProjectsCount.text = "${uiState.data}\nпроєктів"
+                        }
                     }
                 }
             }
@@ -165,7 +173,11 @@ class ProfileFragment : Fragment() {
                 is UiState.Success -> {
                     binding.apply {
                         statisticContainer.showView()
-                        textViewServicesCount.text = "${uiState.data}\nservices"
+                        if(getSystemLanguage() == "en") {
+                            textViewServicesCount.text = "${uiState.data}\nservices"
+                        } else {
+                            textViewServicesCount.text = "${uiState.data}\nпослуг"
+                        }
                     }
                 }
             }
@@ -184,7 +196,11 @@ class ProfileFragment : Fragment() {
                 is UiState.Success -> {
                     binding.apply {
                         statisticContainer.showView()
-                        textViewReviewsCount.text = "${uiState.data}\nreviews"
+                        if(getSystemLanguage() == "en") {
+                            textViewReviewsCount.text = "${uiState.data}\nreviews"
+                        } else {
+                            textViewReviewsCount.text = "${uiState.data}\nвідгуків"
+                        }
                     }
                 }
             }

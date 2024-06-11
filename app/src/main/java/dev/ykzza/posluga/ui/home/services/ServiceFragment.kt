@@ -16,10 +16,15 @@ import dev.ykzza.posluga.databinding.FragmentServiceBinding
 import dev.ykzza.posluga.ui.home.SliderAdapter
 import dev.ykzza.posluga.ui.menu.profile.UserViewModel
 import dev.ykzza.posluga.util.UiState
+import dev.ykzza.posluga.util.convertTimestampToFormattedDateTime
+import dev.ykzza.posluga.util.getStringArrayEnglish
+import dev.ykzza.posluga.util.getSystemLanguage
 import dev.ykzza.posluga.util.hideView
 import dev.ykzza.posluga.util.makeViewGone
 import dev.ykzza.posluga.util.showToast
 import dev.ykzza.posluga.util.showView
+import javax.inject.Inject
+import javax.inject.Named
 
 @AndroidEntryPoint
 class ServiceFragment : Fragment() {
@@ -32,6 +37,10 @@ class ServiceFragment : Fragment() {
 
     private lateinit var serviceViewModel: ServiceViewModel
     private lateinit var userViewModel: UserViewModel
+
+    @Inject
+    @Named("cities")
+    lateinit var cities: Array<Int>
 
     private lateinit var authorId: String
     private val firebaseAuth: FirebaseAuth
@@ -99,10 +108,39 @@ class ServiceFragment : Fragment() {
                     }
                 }
                 is UiState.Success -> {
-                    userViewModel.getUserData(
-                        uiState.data.authorId
-                    )
                     binding.apply {
+                        textViewTitle.text = uiState.data.title
+                        if(uiState.data.price == 0) {
+                            textViewPrice.text = getString(R.string.tradeble_price)
+                        } else {
+                            if(getSystemLanguage() == "en") {
+                                textViewPrice.text = "${uiState.data.price} hrn"
+                            } else {
+                                textViewPrice.text = "${uiState.data.price} грн"
+                            }
+                        }
+                        textViewDescription.text = uiState.data.description
+                        textViewDate.text = convertTimestampToFormattedDateTime(
+                            uiState.data.date.seconds
+                        )
+                        if(getSystemLanguage() == "en") {
+                            textViewGeo.text = "${uiState.data.state} oblast', ${uiState.data.city}"
+                        } else {
+                            val stateIndex =
+                                getStringArrayEnglish(
+                                    requireContext(),
+                                    R.array.states
+                                ).indexOf(uiState.data.state)
+                            val state = requireContext().resources.getStringArray(R.array.states)[stateIndex]
+                            val citiesArray = cities[stateIndex]
+                            val cityIndex =
+                                getStringArrayEnglish(
+                                    requireContext(),
+                                    citiesArray
+                                ).indexOf(uiState.data.city)
+                            val city = requireContext().resources.getStringArray(citiesArray)[cityIndex]
+                            textViewGeo.text = "${state} область, ${city}"
+                        }
                         progressBar.hideView()
                         scrollView.showView()
                         if(uiState.data.images.isEmpty()) {
@@ -110,16 +148,10 @@ class ServiceFragment : Fragment() {
                         } else {
                             setupImageSlider(uiState.data.images)
                         }
-                        textViewTitle.text = uiState.data.title
-                        if(uiState.data.price == 0) {
-                            textViewPrice.text = "Договірна"
-                        } else {
-                            textViewPrice.text = "${uiState.data.price} hrn"
-                        }
-                        textViewDescription.text = uiState.data.description
-                        textViewDate.text = uiState.data.date
-                        textViewGeo.text = "${uiState.data.state}, ${uiState.data.city}"
                     }
+                    userViewModel.getUserData(
+                        uiState.data.authorId
+                    )
                 }
             }
         }

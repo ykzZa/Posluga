@@ -8,7 +8,7 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import dev.ykzza.posluga.data.entities.Project
-import dev.ykzza.posluga.data.entities.SearchResult
+import dev.ykzza.posluga.util.SearchResult
 import dev.ykzza.posluga.util.Constants
 import dev.ykzza.posluga.util.UiState
 import kotlinx.coroutines.Dispatchers

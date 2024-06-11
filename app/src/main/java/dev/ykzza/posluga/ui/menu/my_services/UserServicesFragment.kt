@@ -36,7 +36,7 @@ class UserServicesFragment : Fragment(), MyServicesAdapter.OnItemClickListener,
     }
 
     private val recyclerViewUserServicesAdapter by lazy {
-        ServicesAdapter(this)
+        ServicesAdapter(this, requireContext())
     }
 
     override fun onCreateView(

@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import dev.ykzza.posluga.R
@@ -106,9 +107,7 @@ class EditServiceFragment : Fragment(), ImagesAdapter.OnItemClickListener {
                             it.toUri()
                         })
                         viewModel.setCategory(service.category)
-                        val categoryIndex = categories.indexOf(service.category)
-                        val stateIndex = states.indexOf(service.state)
-                        prepareAutoCompleteTexts(categoryIndex, stateIndex)
+                        prepareAutoCompleteTexts()
                         autoCompleteTextCategory.setText(
                             service.category, false
                         )
@@ -166,8 +165,7 @@ class EditServiceFragment : Fragment(), ImagesAdapter.OnItemClickListener {
                             editTextServiceTitle.text.toString(),
                             editTextServiceDescription.text.toString(),
                             firebaseAuth.uid!!,
-                            LocalDateTime.now()
-                                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                            Timestamp.now(),
                             editTextServicePrice.text.toString(),
                             listImages
                         )

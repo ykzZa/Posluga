@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.Timestamp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.ykzza.posluga.data.entities.Review
 import dev.ykzza.posluga.data.entities.User
@@ -42,9 +43,9 @@ class ReviewViewModel @Inject constructor(
             userId
         ) {
             _userReviews.value = it
-            if(it.isNotEmpty()){
+            if (it.isNotEmpty()) {
                 getUsers(
-                    it.map {  reviewIt ->
+                    it.map { reviewIt ->
                         reviewIt.authorId
                     }
                 ) {
@@ -76,7 +77,7 @@ class ReviewViewModel @Inject constructor(
         authorId: String,
         title: String,
         text: String,
-        date: String,
+        date: Timestamp,
         rating: Int
     ) {
         val review = Review(

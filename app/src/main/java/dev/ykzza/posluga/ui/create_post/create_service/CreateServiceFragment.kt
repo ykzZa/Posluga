@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import dev.ykzza.posluga.R
@@ -93,8 +94,7 @@ class CreateServiceFragment : Fragment(), ImagesAdapter.OnItemClickListener {
                             editTextServiceTitle.text.toString(),
                             editTextServiceDescription.text.toString(),
                             firebaseAuth.uid!!,
-                            LocalDateTime.now().
-                            format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                            Timestamp.now(),
                             editTextServicePrice.text.toString(),
                             uiState.data
                         )

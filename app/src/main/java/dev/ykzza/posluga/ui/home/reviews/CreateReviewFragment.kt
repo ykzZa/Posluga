@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import dev.ykzza.posluga.R
@@ -84,8 +85,7 @@ class CreateReviewFragment : Fragment() {
                         firebaseAuth.uid ?: throw RuntimeException("Guest can't add reviews"),
                         titleText,
                         reviewText,
-                        LocalDateTime.now().
-                        format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        Timestamp.now(),
                         rating
                     )
                 }

@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.Timestamp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.ykzza.posluga.R
 import dev.ykzza.posluga.data.entities.Project
@@ -168,7 +169,7 @@ class ProjectViewModel @Inject constructor(
                     _category.value!!,
                     _subCategory.value!!,
                     authorId,
-                    date,
+                    Timestamp.now(),
                     price.toIntOrNull() ?: 0,
                     _state.value!!,
                     _city.value!!
@@ -204,7 +205,7 @@ class ProjectViewModel @Inject constructor(
                     category,
                     subCategory,
                     authorId,
-                    date,
+                    Timestamp.now(),
                     price.toIntOrNull() ?: 0,
                     state,
                     city

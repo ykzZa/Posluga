@@ -7,7 +7,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import dev.ykzza.posluga.data.entities.SearchResult
+import dev.ykzza.posluga.util.SearchResult
 import dev.ykzza.posluga.data.entities.Service
 import dev.ykzza.posluga.util.Constants
 import dev.ykzza.posluga.util.UiState

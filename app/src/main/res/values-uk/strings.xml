@@ -37,7 +37,7 @@
     <string name="subcategory_text">Підкатегорія</string>
     <string name="drop_down_menu_subcategory_text">Оберіть підкатегорію</string>
     <string name="state_text">Область</string>
-    <string name="drop_down_menu_state_text">Оберість область</string>
+    <string name="drop_down_menu_state_text">Оберіть область</string>
     <string name="city_text">Місто</string>
     <string name="drop_down_menu_city_text">Оберіть місто</string>
     <string name="edit_text_service_price_hint">Напишіть ціну</string>
@@ -106,4 +106,7 @@
     <string name="home_text">Головна</string>
     <string name="services_text">Послуги</string>
     <string name="projects_text">Проєкти</string>
+    <string name="button_back_text">Go back</string>
+    <string name="tradeble_price">Договірна</string>
+    <string name="user_profile_picture">User profile picture</string>
 </resources>

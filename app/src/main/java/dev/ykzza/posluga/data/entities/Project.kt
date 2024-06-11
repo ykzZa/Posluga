@@ -1,5 +1,7 @@
 package dev.ykzza.posluga.data.entities
 
+import com.google.firebase.Timestamp
+
 data class Project(
     var projectId: String,
     val title: String,
@@ -7,7 +9,7 @@ data class Project(
     val category: String,
     val subCategory: String,
     val authorId: String,
-    val date: String,
+    val date: Timestamp,
     val price: Int,
     val state: String,
     val city: String,
@@ -20,7 +22,7 @@ data class Project(
         "",
         "",
         "",
-        "",
+        Timestamp.now(),
         0,
         "",
         "",

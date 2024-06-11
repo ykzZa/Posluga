@@ -28,7 +28,8 @@ class BrowseProjectsFragment : Fragment(),
 
     private val recyclerViewAdapter by lazy {
         ProjectsAdapter(
-            this
+            this,
+            requireContext()
         )
     }
 

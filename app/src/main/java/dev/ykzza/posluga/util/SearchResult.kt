@@ -1,4 +1,4 @@
-package dev.ykzza.posluga.data.entities
+package dev.ykzza.posluga.util
 
 data class SearchResult<T>(
     val item: T,
